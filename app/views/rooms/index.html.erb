@@ -1,0 +1,246 @@
+<!--
+// v0 by Vercel.
+// https://v0.dev/t/KLaYcuYMLi5
+-->
+
+<div class="flex h-screen">
+  <div class="flex flex-col w-64 border-r">
+    <div class="flex items-center justify-between p-4 border-b">
+      <div class="flex items-center space-x-2">
+        <span class="font-semibold">Your Store</span>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-4 h-4"
+      >
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </div>
+    <div class="flex flex-col p-4 space-y-2">
+      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+        >
+          <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+          <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+        </svg>
+        <span>Open</span>
+      </div>
+      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+        >
+          <rect width="20" height="5" x="2" y="3" rx="1"></rect>
+          <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"></path>
+          <path d="M10 12h4"></path>
+        </svg>
+        <span>Closed</span>
+      </div>
+    </div>
+    <div class="flex flex-col p-4 space-y-2">
+      <span class="text-sm text-muted-foreground">Filters</span>
+      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+        >
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span>Assigned to me</span>
+      </div>
+      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <line x1="17" x2="22" y1="8" y2="13"></line>
+          <line x1="22" x2="17" y1="8" y2="13"></line>
+        </svg>
+        <span>Unassigned</span>
+      </div>
+      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+        >
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+        <span>Unread</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-2 h-2 text-blue-500"
+        >
+          <circle cx="12.1" cy="12.1" r="1"></circle>
+        </svg>
+      </div>
+      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m4.9 4.9 14.2 14.2"></path>
+        </svg>
+        <span>Blocked</span>
+      </div>
+    </div>
+    <div class="flex items-center p-4 mt-auto space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 cursor-pointer">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-4 h-4"
+      >
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+      <span>Settings</span>
+    </div>
+  </div>
+  <div class="flex flex-col w-64 border-r">
+    <div class="flex items-center justify-between p-4 border-b">
+      <span class="font-semibold">Open</span>
+    </div>
+    <div class="flex flex-col space-y-2">
+      <div class="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-100">
+        <div class="flex items-center space-x-2">
+          <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+            <img class="aspect-square h-full w-full" alt="Sameed Atif" src="https://i.pravatar.cc/150" />
+          </span>
+          <div class="flex flex-col">
+            <span class="font-medium">Sameed Atif</span>
+            <span class="text-sm text-muted-foreground">Hello World</span>
+          </div>
+        </div>
+        <div class="flex flex-col items-end space-y-1">
+          <span class="text-sm text-muted-foreground">1:55 PM</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-2 h-2 text-blue-500"
+          >
+            <circle cx="12.1" cy="12.1" r="1"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col flex-1 p-4">
+    <div class="flex flex-col flex-1">
+      <div class="flex items-center justify-center flex-1 text-muted-foreground">
+        Select a conversation to view it.
+      </div>
+      <div class="flex flex-col gap-4 py-2">
+        <div class="bg-primary text-primary-foreground rounded-full px-4 py-2 w-max border bg-black	text-white">
+          Hey there! How's it going?
+        </div>
+        <div class="bg-muted text-muted-foreground rounded-full px-4 py-2 w-max ml-auto border">
+          Pretty good, thanks for asking!
+        </div>
+      </div>
+      <%= form_with model: @message do |f| %>
+        <div class="border-t flex items-center p-4 space-x-2">
+          <%= f.text_field :body,
+            class:"flex min-h-[80px] w-full flex-1 resize-none rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+            placeholder:"Type your message...."
+          %>
+          <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 bg-black">
+            <svg class="w-5 h-5 transform rotate-90 -mr-px fill-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
