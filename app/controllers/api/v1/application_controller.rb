@@ -2,18 +2,18 @@
 
 class Api::V1::ApplicationController < ActionController::API
   include ActionController::Cookies
-  # include ExceptionHandler
+  include ::ExceptionHandler
 
-  # before_action :authenticate
+  before_action :authenticate
 
-  # private
+  private
 
-  # def authenticate
-  #   current_user, decoded_token = Jwt::Authenticator.call(
-  #     headers: cookies.encrypted[:auth]&.split(":")&.first,
-  #   )
+  def authenticate
+    current_user, decoded_token = Jwt::Authenticator.call(
+      headers: cookies.encrypted[:auth]&.split(":")&.first,
+    )
 
-  #   @current_user = current_user
-  #   @decoded_token = decoded_token
-  # end
+    @current_user = current_user
+    @decoded_token = decoded_token
+  end
 end

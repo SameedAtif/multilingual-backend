@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :rooms
       resources :messages
       resource :session, only: %i[create destroy update]
+      resources :users, only: %i[show create]
     end
   end
 

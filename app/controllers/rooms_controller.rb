@@ -1,15 +1,13 @@
 class RoomsController < ApplicationController
-  # before_action :set_status
-
   def index
-    @rooms = current_user.rooms
+    @rooms = current_user.rooms.joins(:messages).uniq
     @first_room = @rooms.first
     @message = Message.new(room: @first_room, user: current_user)
   end
 
   def show
     @room = Room.find(params[:id])
-    @other_participant_name = @room.other_participant(current_user).user.full_name
+    @other_participant_name = @room.other_participant(current_user).user.name
     @message = Message.new(room: @room, user: current_user)
     @messages = @room.messages
     @switch_tab = params[:switch_tab] == 'true'
@@ -34,17 +32,13 @@ class RoomsController < ApplicationController
       @room.participants << Participant.new(room: @room, user_id: params[:participant_id])
       @room.save!
     end
-    @other_participant_name = User.find(params[:participant_id]).full_name
+    @other_participant_name = User.find(params[:participant_id]).name
     # TODO: Delete rooms with no messages.
     @message = Message.new(room: @room, user: current_user)
     @messages = @room.messages
     respond_to do |format|
       format.js
     end
-  end
-
-  def set_status
-    current_user.update!(status: User.statuses[:online]) if current_user
   end
 
   def room_params

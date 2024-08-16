@@ -6,7 +6,12 @@ module Api
       skip_before_action :authenticate, only: %i[create update]
 
       def create
-        user = User.find_by_email!(params[:email]).authenticate(params[:password])
+        user = User.find_by_email!(params[:email])
+        user = if user.valid_password?(params[:password])
+                  user
+                else
+                  raise ::ExceptionHandler::Unauthorized
+                end
         access_token, refresh_token = Jwt::Issuer.call(user)
         cookies.encrypted[:auth] = {
           value: "#{access_token}:#{refresh_token.crypted_token}",
