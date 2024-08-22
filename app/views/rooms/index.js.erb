@@ -1,0 +1,2 @@
+$("#room-list").html("<%= escape_javascript render(partial: 'rooms/rooms_list') %>");
+$("#room-tab").html("<%= escape_javascript render(partial: 'rooms/room_tab', locals: { room: @first_room }) if @first_room.present? %>");

@@ -8,7 +8,7 @@ module Api
 
       def create
         @message = Message.create!(
-          body: params["body"],
+          source_text: params["source_text"],
           user_id: @user.id,
           room_id: @room.id
         )

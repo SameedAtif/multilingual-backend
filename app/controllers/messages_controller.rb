@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   def create
     @message = current_user.messages.create!(
-      body: msg_params[:body],
+      source_text: msg_params[:source_text],
       room_id: msg_params[:room_id]
     )
     ActionCable.server.broadcast("rooms_channel:#{@message.room.id}", broadcast_payload)
@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
   private
 
   def msg_params
-    params.require(:message).permit(:body, :room_id)
+    params.require(:message).permit(:source_text, :room_id)
   end
 
   def broadcast_payload

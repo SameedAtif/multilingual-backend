@@ -1,8 +1,13 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = current_user.rooms.joins(:messages).uniq
+    @rooms = current_org.rooms.joins(:messages).where(status: (params[:room_status].presence || 'open')).uniq
+    @room_type = (params[:room_status].presence || 'open').to_s.capitalize
     @first_room = @rooms.first
     @message = Message.new(room: @first_room, user: current_user)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def show

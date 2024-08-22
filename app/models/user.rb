@@ -4,10 +4,26 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :organization, optional: true
+
+  has_one :owned_org, foreign_key: "owner_id", class_name: "Organization"
+
   has_many :messages
   has_many :participants
   has_many :rooms, through: :participants
   has_many :refresh_tokens, dependent: :delete_all
   has_many :whitelisted_tokens, dependent: :delete_all
   has_many :blacklisted_tokens, dependent: :delete_all
+
+  enum user_type: {
+    internal: 0, # We have a password for them
+    external: 1 # Shopify user, guest user (we don't have a password for them)
+  }
+
+  protected
+
+  def password_required?
+    return false if external?
+    super
+  end
 end

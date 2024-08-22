@@ -7,152 +7,180 @@
   <div class="flex flex-col w-64 border-r">
     <div class="flex items-center justify-between p-4 border-b">
       <div class="flex items-center space-x-2">
-        <span class="font-semibold">Your Store</span>
+        <span class="font-semibold"><%= current_user.owned_org.name %></span>
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="w-4 h-4"
-      >
-        <path d="m6 9 6 6 6-6"></path>
-      </svg>
     </div>
     <div class="flex flex-col p-4 space-y-2">
-      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4"
-        >
-          <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
-          <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
-        </svg>
-        <span>Open</span>
-      </div>
-      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4"
-        >
-          <rect width="20" height="5" x="2" y="3" rx="1"></rect>
-          <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"></path>
-          <path d="M10 12h4"></path>
-        </svg>
-        <span>Closed</span>
-      </div>
+      <%= button_to rooms_path,
+        method: :get,
+        local: false,
+        remote: true,
+        params: {room_status: 'open'},
+        form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
+          <div class="flex items-center space-x-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4"
+            >
+              <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+              <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+            </svg>
+            <span>Open</span>
+          </div>
+      <% end %>
+      <%= button_to rooms_path,
+        method: :get,
+        local: false,
+        remote: true,
+        params: {room_status: 'closed'},
+        form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
+          <div class="flex items-center space-x-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4"
+            >
+              <rect width="20" height="5" x="2" y="3" rx="1"></rect>
+              <path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"></path>
+              <path d="M10 12h4"></path>
+            </svg>
+            <span>Closed</span>
+          </div>
+      <% end %>
     </div>
     <div class="flex flex-col p-4 space-y-2">
       <span class="text-sm text-muted-foreground">Filters</span>
-      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4"
-        >
-          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-        <span>Assigned to me</span>
-      </div>
-      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4"
-        >
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-          <circle cx="9" cy="7" r="4"></circle>
-          <line x1="17" x2="22" y1="8" y2="13"></line>
-          <line x1="22" x2="17" y1="8" y2="13"></line>
-        </svg>
-        <span>Unassigned</span>
-      </div>
-      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4"
-        >
-          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-        </svg>
-        <span>Unread</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-2 h-2 text-blue-500"
-        >
-          <circle cx="12.1" cy="12.1" r="1"></circle>
-        </svg>
-      </div>
-      <div class="flex items-center space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="w-4 h-4"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="m4.9 4.9 14.2 14.2"></path>
-        </svg>
-        <span>Blocked</span>
-      </div>
+        <%= button_to rooms_path,
+          method: :get,
+          local: false,
+          remote: true,
+          params: {switch_tab: 'true'},
+          form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
+            <div class="flex items-center space-x-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="w-4 h-4"
+              >
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>Assigned to me</span>
+            </div>
+        <% end %>
+      <%= button_to rooms_path,
+        method: :get,
+        local: false,
+        remote: true,
+        params: {switch_tab: 'true'},
+        form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
+          <div class="flex items-center space-x-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4"
+            >
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <line x1="17" x2="22" y1="8" y2="13"></line>
+              <line x1="22" x2="17" y1="8" y2="13"></line>
+            </svg>
+            <span>Unassigned</span>
+          </div>
+      <% end %>
+      <%= button_to rooms_path,
+        method: :get,
+        local: false,
+        remote: true,
+        params: {switch_tab: 'true'},
+        form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
+          <div class="flex items-center space-x-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>Unread</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-2 h-2 text-blue-500"
+            >
+              <circle cx="12.1" cy="12.1" r="1"></circle>
+            </svg>
+          </div>
+      <% end %>
+      <%= button_to rooms_path,
+        method: :get,
+        local: false,
+        remote: true,
+        params: {switch_tab: 'true'},
+        form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
+          <div class="flex items-center space-x-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="m4.9 4.9 14.2 14.2"></path>
+            </svg>
+            <span>Blocked</span>
+          </div>
+      <% end %>
     </div>
     <div class="flex items-center p-4 mt-auto space-x-2 rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 cursor-pointer">
       <svg
@@ -173,37 +201,10 @@
       <span>Settings</span>
     </div>
   </div>
-  <div class="flex flex-col w-64 border-r">
-    <div class="flex items-center justify-between p-4 border-b">
-      <span class="font-semibold">Open</span>
-    </div>
-    <div class="h-full overflow-hidden relative">
-      <div class="flex flex-col divide-y h-full overflow-y-auto">
-        <% @rooms.each do |room| %>
-          <%= button_to room_path(room.id),
-            method: :get,
-            local: false,
-            remote: true,
-            params: {switch_tab: 'true'},
-            class: "flex flex-row items-center p-4 relative",
-            form_class: "hover:bg-muted hover:text-muted-foreground hover:bg-gray-100" do %>
-            <%# <div class="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">2 hours ago</div> %>
-            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
-              <%= room.other_participant(current_user).user.name.first %>
-            </div>
-            <div class="flex flex-col flex-grow ml-3">
-              <div class="text-sm font-medium"><%= room.other_participant(current_user).user.name %></div>
-              <div class="text-xs truncate w-40"><%= room.messages.last.body %></div>
-            </div>
-            <%# <div class="flex-shrink-0 ml-2 self-end mb-1">
-              <span class="flex items-center justify-center h-5 w-5 bg-red-500 text-white text-xs rounded-full">3</span>
-            </div> %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
+  <div id="room-list" class="flex flex-col w-64 border-r">
+    <%= render partial: 'rooms/rooms_list' %>
   </div>
   <div id="room-tab" class="w-full">
-    <%= render partial: 'rooms/room_tab', locals: { room: @first_room }%>
+    <%= render partial: 'rooms/room_tab', locals: { room: @first_room } if @first_room.present? %>
   </div>
 </div>

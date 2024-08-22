@@ -1,0 +1,2 @@
+class ShopifySession < ApplicationRecord
+end
