@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
   has_one :owned_org, foreign_key: "owner_id", class_name: "Organization"
 
-  has_many :messages
-  has_many :participants
+  has_many :messages, dependent: :destroy
+  has_many :participants, dependent: :destroy
   has_many :rooms, through: :participants
   has_many :refresh_tokens, dependent: :delete_all
   has_many :whitelisted_tokens, dependent: :delete_all

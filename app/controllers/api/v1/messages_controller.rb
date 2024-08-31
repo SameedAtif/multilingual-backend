@@ -3,6 +3,8 @@ module Api
     class MessagesController < ApplicationController
       include ActionView::RecordIdentifier
 
+      skip_before_action :authenticate, only: %i[create]
+
       before_action :assign_user
       before_action :assign_room
 

@@ -8,11 +8,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://e13c-72-255-38-177.ngrok-free.app'
+    origins '*'
 
     resource '*',
     headers: :any,
-    credentials: true,
+    credentials: false,
     methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end
