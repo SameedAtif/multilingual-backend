@@ -9,6 +9,8 @@ class MessagesController < ApplicationController
     ActionCable.server.broadcast("rooms_channel:#{@message.room.id}", broadcast_payload)
   end
 
+  def settings; end
+
   private
 
   def msg_params

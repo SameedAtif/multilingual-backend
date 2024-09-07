@@ -19,9 +19,27 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :organizations
-  resources :messages
+  resources :organizations do
+    collection do
+      get 'settings'
+    end
+  end
+  resources :messages do
+    collection do
+      get 'settings'
+    end
+  end
   resources :rooms do
+    collection do
+      get 'appearance_setting'
+    end
     resources :messages
   end
+  resources :notifications, only: [] do
+    collection do
+      get 'settings'
+    end
+  end
+
+  get '/settings' => 'rooms#settings', as: :settings
 end

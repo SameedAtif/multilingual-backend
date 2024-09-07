@@ -46,6 +46,12 @@ class RoomsController < ApplicationController
     end
   end
 
+  def settings; end
+
+  def appearance_setting; end
+
+  private
+
   def room_params
     params.require(:room).permit(:name)
   end

@@ -1,6 +1,4 @@
 class OrganizationsController < ApplicationController
-  include ActionController::Live
-
   skip_before_action :authenticate_user!, only: [:new, :index]
 
   def new
@@ -20,8 +18,7 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  def index
-  end
+  def settings; end
 
   private
 

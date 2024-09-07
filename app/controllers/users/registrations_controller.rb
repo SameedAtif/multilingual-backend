@@ -1,13 +1,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_permitted_parameters, only: :update
 
   def new
     @site_id = params[:name]
     @website = params[:website]
-    super
-  end
-
-  def create
     super
   end
 
@@ -19,5 +16,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     new_organization_path(name: params.dig(:user, :website), website: params.dig(:user, :site_id))
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :current_password, :password, :password_confirmation])
   end
 end
