@@ -10,19 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_22_094157) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_075247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "_prisma_migrations", id: { type: :string, limit: 36 }, force: :cascade do |t|
-    t.string "checksum", limit: 64, null: false
-    t.timestamptz "finished_at"
-    t.string "migration_name", limit: 255, null: false
-    t.text "logs"
-    t.timestamptz "rolled_back_at"
-    t.timestamptz "started_at", default: -> { "now()" }, null: false
-    t.integer "applied_steps_count", default: 0, null: false
-  end
 
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "jti"
@@ -47,6 +37,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_094157) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "resource_id", null: false
+    t.string "resource_type", null: false
+    t.string "user_type", null: false
+    t.bigint "user_id"
+    t.string "notification_type", null: false
+    t.jsonb "extra"
+    t.datetime "read_at"
+    t.datetime "cleared_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_type", "resource_id"], name: "index_notifications_on_resource_type_and_resource_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "website", default: "", null: false
@@ -54,6 +59,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_094157) do
     t.bigint "current_assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "background_color"
+    t.string "text_color"
+    t.string "button_color"
+    t.string "icon"
+    t.string "label"
+    t.string "greeting_message"
     t.index ["current_assignee_id"], name: "index_organizations_on_current_assignee_id"
     t.index ["owner_id"], name: "index_organizations_on_owner_id"
   end
@@ -105,6 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_094157) do
     t.string "locale"
     t.boolean "collaborator"
     t.boolean "email_verified"
+    t.index ["user_id"], name: "index_shopify_sessions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -118,9 +130,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_094157) do
     t.datetime "updated_at", null: false
     t.datetime "token_issued_at"
     t.integer "user_type", default: 0, null: false
-    t.bigint "organizations_id"
+    t.bigint "organization_id"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.integer "invited_by_id"
+    t.string "invited_by_type"
+    t.boolean "notification_conversation_assigned_email"
+    t.boolean "notification_conversation_assigned_push"
+    t.boolean "notification_message_received_email"
+    t.boolean "notification_message_received_push"
+    t.boolean "notification_message_reminder_email"
+    t.boolean "notification_message_reminder_push"
+    t.boolean "message_on_enter_key"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["organizations_id"], name: "index_users_on_organizations_id"
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -137,6 +164,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_094157) do
   add_foreign_key "blacklisted_tokens", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "organizations", "users", column: "current_assignee_id"
   add_foreign_key "organizations", "users", column: "owner_id"
   add_foreign_key "participants", "rooms"
@@ -144,5 +172,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_094157) do
   add_foreign_key "refresh_tokens", "users"
   add_foreign_key "rooms", "organizations"
   add_foreign_key "rooms", "users", column: "assignee_id"
+  add_foreign_key "shopify_sessions", "users"
   add_foreign_key "whitelisted_tokens", "users"
 end

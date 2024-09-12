@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "rooms#index"
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations', invitations: 'users/invitations' }
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       resources :users, only: %i[show create]
     end
   end
+
+  match 'users/:id' => 'users#destroy', :via => :delete, :as => :admin_destroy_user
+
 
   resources :organizations do
     collection do

@@ -1,33 +1,35 @@
 <div class="flex min-h-screen">
   <%= render partial: 'organizations/settings_sidebar', locals: { active_tab: 'message_preference' } %>
   <main class="flex-1 px-8 py-2">
-    <div class="grid grid-cols-2 items-center">
-      <h1 class="text-2xl font-semibold mb-6">Message Preferences</h1>
-      <div>
-        <button class="flex items-center min-w-24 bg-gray-600 hover:bg-black float-right text-white text-sm px-2 py-2 rounded" type="button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 lucide lucide-save"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
-          Save
-        </button>
-      </div>
-    </div>
-    <div class="space-y-4">
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-4" data-v0-t="card">
-        <div class="flex flex-col space-y-1.5 py-2 px-6">
-          <h3 class="whitespace-nowrap tracking-tight text-lg font-semibold">
-            When writing a message, press ↵ return to...
-          </h3>
-        </div>
-        <div class="py-4 px-6 space-y-2">
-          <div class="flex items-center mb-4">
-              <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Send the message</label>
-          </div>
-          <div class="flex items-center">
-              <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start a new line (use ⌘ command + ↵ return to send)</label>
-          </div>
+    <%= form_for(current_user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
+      <div class="grid grid-cols-2 items-center">
+        <h1 class="text-2xl font-semibold mb-6">Message Preferences</h1>
+        <div>
+          <%= f.button nil, class:"flex items-center min-w-24 bg-gray-600 hover:bg-black float-right text-white text-sm px-2 py-2 rounded" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 lucide lucide-save"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
+            Save
+          <% end %>
         </div>
       </div>
-    </div>
+      <div class="space-y-4">
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-4" data-v0-t="card">
+          <div class="flex flex-col space-y-1.5 py-2 px-6">
+            <h3 class="whitespace-nowrap tracking-tight text-lg font-semibold">
+              When writing a message, press ↵ return to...
+            </h3>
+          </div>
+          <div class="py-4 px-6 space-y-2">
+            <div class="flex items-center mb-4">
+                <%= f.radio_button :message_on_enter_key, true, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300" %>
+                <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Send the message</label>
+            </div>
+            <div class="flex items-center">
+                <%= f.radio_button :message_on_enter_key, false, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300" %>
+                <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Start a new line (use ⌘ command + ↵ return to send)</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </main>
 </div>

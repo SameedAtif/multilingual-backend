@@ -11,7 +11,7 @@ class WebsiteEntities < ActiveRecord::Migration[7.1]
     end
     # User to scope to Organizations
     add_column :users, :user_type, :integer, null: false, default: 0
-    add_reference :users, :organizations, index: true
+    add_reference :users, :organization
 
     # Rooms assignee
     add_reference :rooms, :assignee, foreign_key: { to_table: :users }
