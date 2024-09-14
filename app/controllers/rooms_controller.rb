@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   def index
     @rooms = current_org.rooms.joins(:messages).where(status: (params[:room_status].presence || 'open')).uniq
     @room_type = (params[:room_status].presence || 'open').to_s.capitalize
-    @first_room = @rooms.first
+    @current_room = @first_room = @rooms.first
     @message = Message.new(room: @first_room, user: current_user)
     respond_to do |format|
       format.js
@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+    @current_room = @room = Room.find(params[:id])
     @other_participant_name = @room.other_participant(current_user).user.name
     @message = Message.new(room: @room, user: current_user)
     @messages = @room.messages

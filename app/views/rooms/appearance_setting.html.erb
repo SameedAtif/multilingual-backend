@@ -1,3 +1,14 @@
+<style>
+  #chat-header, .sent-message, #send-button, #open-chat {
+    background-color: <%= current_user.owned_org.background_color || 'black' %>;
+  }
+  #message-icon, #cross-icon, #chat-text, .sent-message, #send-button, #chat-header {
+    color: <%= current_user.owned_org.text_color || 'white' %>;
+  }
+  #send-button {
+    background-color: <%= current_user.owned_org.button_color || 'black' %>;
+  }
+</style>
 <script>
   function showHideChatBox(e) {
     e.preventDefault();
@@ -31,12 +42,30 @@
       let color = $(this).val();
       $("#send-button").css("background-color", color);
     });
+    $('#icon-select').on('change', function() {
+      const selectedValue = $(this).val();
+      let newSVG;
+
+      // Replace with different SVGs based on the selection
+      if (selectedValue === 'message_square_more') {
+        newSVG = '<svg id="message-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-more"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>';
+      } else if (selectedValue === 'message_circle_question') {
+        newSVG = '<svg id="message-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-question"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>';
+      }
+      // Replace the current SVG
+      $('#message-icon-container').html(newSVG);
+    });
+
+    $('#label-select').on('change', function() {
+      const selectedValue = $('#label-select option:selected').text();
+      $('#chat-text').html(selectedValue);
+    });
   });
 </script>
 <div class="flex min-h-screen">
   <%= render partial: 'organizations/settings_sidebar', locals: { active_tab: 'chat_appearance' } %>
   <main class="flex-1 px-8 py-2">
-    <%= form_with model: current_user.owned_org, method: :put do |f| %>
+    <%= form_with model: current_user.owned_org, method: :put, class: 'h-full' do |f| %>
       <div class="grid grid-cols-2 items-center">
         <h1 class="text-2xl font-semibold mb-6">Chat Appearance</h1>
         <div>
@@ -56,40 +85,40 @@
           <div class="mt-4">
             <div class="grid items-center grid-cols-2 border-t-2 py-2">
               <div>
-                <input type='color' id="background-color"/>
+                <%= f.color_field :background_color, id: 'background-color' %>
               </div>
               <div>
                 <p class="text-xs py-1">
                   Background
                 </p>
                 <p class="text-xs" id="backgroud-color-para">
-                  #ff0000
+                  <%= current_user.owned_org.background_color %>
                 </p>
               </div>
             </div>
             <div class="grid items-center grid-cols-2 border-t-2 py-2">
               <div>
-                <input type='color' id="text-color"/>
+                <%= f.color_field :text_color, id: 'text-color' %>
               </div>
               <div>
                 <p class="text-xs py-1">
                   Text
                 </p>
                 <p class="text-xs" id="text-color-para">
-                  #ff0000
+                  <%= current_user.owned_org.text_color %>
                 </p>
               </div>
             </div>
             <div class="grid items-center grid-cols-2 border-t-2 py-2">
               <div>
-                <input type='color' id="button-color"/>
+                <%= f.color_field :button_color, id: 'button-color' %>
               </div>
               <div>
                 <p class="text-xs py-1">
                   Buttons
                 </p>
                 <p class="text-xs">
-                  #ff0000
+                  <%= current_user.owned_org.button_color %>
                 </p>
               </div>
             </div>
@@ -100,7 +129,7 @@
                 </p>
               </div>
               <div>
-                <%= select_tag "people", options_for_select([["Ali", 1], ["Ahmad", 2], ["Asad", 3]]), class: "px-1 py-1 rounded-lg text-sm w-full" %>
+                <%= f.select :icon, options_from_collection_for_select(Organization::VALID_ICONS, :first, :last), {}, {class: "px-1 py-1 rounded-lg text-sm w-full", id: 'icon-select'} %>
               </div>
             </div>
             <div class="grid items-center grid-cols-2 border-t-2 py-2">
@@ -110,7 +139,7 @@
                 </p>
               </div>
               <div>
-                <%= select_tag "people", options_for_select([["Ali", 1], ["Ahmad", 2], ["Asad", 3]]), class: "px-1 py-1 rounded-lg text-sm w-full" %>
+                <%= f.select :label, options_from_collection_for_select(Organization::VALID_LABELS, :first, :last), {}, {class: "px-1 py-1 rounded-lg text-sm w-full", id: 'label-select'} %>
               </div>
             </div>
             <div class="border-t-2 py-2">
@@ -120,7 +149,7 @@
                 </p>
               </div>
               <div>
-                <%= text_area_tag "post", "", class: "rounded-lg w-full" %>
+                <%= f.text_area :greeting_message, class: "rounded-lg w-full" %>
               </div>
             </div>
           </div>
@@ -160,9 +189,16 @@
                 </div>
               </div>
               <button id="open-chat" class="mb-4 float-right bg-black text-white py-2 px-4 rounded-md transition duration-300 flex items-center" onclick="showHideChatBox(event)">
-                <svg id="message-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-more"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+
+                <span id="message-icon-container">
+                  <% if current_user.owned_org.icon == 'message_circle_question' %>
+                    <svg id="message-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-question"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                  <% else %>
+                    <svg id="message-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-more"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+                  <% end %>
+                </span>
                 <svg id="cross-icon" style="display: none;"xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-                <span id="chat-text" class="ml-2 text-xl">Chat</span>
+                <span id="chat-text" class="ml-2 text-xl"><%= Organization::VALID_LABELS[current_user.owned_org.label.to_sym] || 'Chat'%></span>
               </button>
             </div>
           </div>

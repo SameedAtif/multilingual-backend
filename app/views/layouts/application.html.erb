@@ -14,6 +14,8 @@
 
   <body>
     <main>
+      <%= turbo_stream_from("notifications_channel:#{current_user.id}", channel: NotificationsChannel) if current_user %>
+
       <%= yield %>
     </main>
   </body>

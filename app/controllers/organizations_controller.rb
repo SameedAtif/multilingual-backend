@@ -18,11 +18,17 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def update
+    @organization = Organization.find(params[:id])
+    @organization.update(permitted_params)
+    redirect_back fallback_location: root_path
+  end
+
   def settings; end
 
   private
 
   def permitted_params
-    params.require(:organization).permit(:name, :website)
+    params.require(:organization).permit(:name, :website, :background_color, :text_color, :button_color, :icon, :label, :greeting_message)
   end
 end

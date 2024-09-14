@@ -62,10 +62,6 @@
               <div>
                 <h3 class="text-sm font-semibold">When you've been assigned to a conversation</h3>
                 <div class="space-y-1">
-                  <div class="flex items-center mb-2">
-                      <%=f.check_box :notification_conversation_assigned_push, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"%>
-                      <%=f.label :notification_conversation_assigned_push, "Push notifications (desktop)", class:"ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"%>
-                  </div>
                   <div class="flex items-center">
                       <%=f.check_box :notification_conversation_assigned_email, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"%>
                       <%=f.label :notification_conversation_assigned_email, "Email notifications", class:"ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"%>
@@ -78,10 +74,6 @@
                   You won't be notified of new messages from conversations assigned to other staff.
                 </p>
                 <div class="space-y-1">
-                  <div class="flex items-center mb-2">
-                      <%=f.check_box :notification_message_received_push, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"%>
-                      <%=f.label :notification_message_received_push, "Push notifications (desktop)", class:"ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"%>
-                  </div>
                   <div class="flex items-center">
                       <%=f.check_box :notification_message_received_email, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"%>
                       <%=f.label :notification_message_received_email, "Email notifications", class:"ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"%>
@@ -94,10 +86,6 @@
                   You won't be notified of unread messages from conversations assigned to other staff.
                 </p>
                 <div class="space-y-1">
-                  <div class="flex items-center mb-2">
-                      <%=f.check_box :notification_message_reminder_push, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"%>
-                      <%=f.label :notification_message_reminder_push, "Push notifications (desktop)", class:"ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"%>
-                  </div>
                   <div class="flex items-center">
                       <%=f.check_box :notification_message_reminder_email, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"%>
                       <%=f.label :notification_message_reminder_email, "Email notifications", class:"ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"%>
