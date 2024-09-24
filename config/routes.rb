@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
+      resource :organization, only: [:show]
       resources :rooms
       resources :messages
       resource :session, only: %i[create destroy update]

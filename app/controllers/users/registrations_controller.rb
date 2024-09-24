@@ -8,6 +8,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def create
+    debugger
+    super
+  end
+
   protected
 
   def update_resource(resource, params)
