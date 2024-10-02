@@ -15,7 +15,7 @@ export default class extends Controller {
         consumer.subscriptions.create({ channel: "RoomsChannel", room: roomId}, {
           received(data) {
             const roomId = document.getElementById('message-box').dataset.roomId;
-            if(userId != data.sender_id) {
+            if(userId == data.sender_id) {
               $(`#messages-room-${roomId}`).append($.parseHTML( data.sender));
             } else {
               $(`#messages-room-${roomId}`).append($.parseHTML( data.receiver));

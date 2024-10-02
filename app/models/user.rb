@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   def password_required?
     return false if external?
+
     super
   end
 end

@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_075247) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_02_080639) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "_prisma_migrations", id: { type: :string, limit: 36 }, force: :cascade do |t|
+    t.string "checksum", limit: 64, null: false
+    t.timestamptz "finished_at"
+    t.string "migration_name", limit: 255, null: false
+    t.text "logs"
+    t.timestamptz "rolled_back_at"
+    t.timestamptz "started_at", default: -> { "now()" }, null: false
+    t.integer "applied_steps_count", default: 0, null: false
+  end
 
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "jti"
@@ -145,6 +155,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_075247) do
     t.boolean "notification_message_reminder_email"
     t.boolean "notification_message_reminder_push"
     t.boolean "message_on_enter_key"
+    t.string "language", default: "en", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"

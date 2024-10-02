@@ -1,7 +1,7 @@
 <div class="flex min-h-screen">
   <%= render partial: 'organizations/settings_sidebar', locals: { active_tab: 'account_setting' } %>
   <main class="flex-1 px-8 py-2">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class:"space-y-4 md:space-y-6" }) do |f| %>
       <div class="grid grid-cols-2 items-center">
         <h1 class="text-2xl font-semibold mb-6">Edit Profile</h1>
         <div>
@@ -21,13 +21,16 @@
           <p class="text-sm text-muted-foreground">Manage your personal informaiton</p>
           <div class="grid grid-cols-1 gap-x-1 mt-4 md:grid-cols-2">
             <div class="field">
-              <%= f.label :name %><br />
-              <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+              <%= f.label :name, class:"block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
             </div>
-
             <div class="field">
-              <%= f.label :email %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              <%= f.label :email, class:"block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+            </div>
+            <div class="field">
+              <%= f.label :language, class:"block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.select :language, options_for_select(I18nData.languages('EN').invert, current_user.language), {}, {class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"} %>
             </div>
           </div>
         </div>
@@ -42,23 +45,22 @@
             <h2 class="text-lg font-semibold">Security Information</h2>
           </div>
           <p class="text-sm text-muted-foreground">Manage your security informaiton</p>
-          <div class="grid grid-cols-1 mt-4 md:grid-cols-2">
+          <div class="">
             <div class="field">
-              <%= f.label :current_password %><br />
-              <%= f.password_field :current_password, autocomplete: "current-password" %>
+              <%= f.label :current_password, class:"block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.password_field :current_password, autocomplete: "current-password", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
             </div>
             <div class="field">
-              <%= f.label :password %><br />
-              <%= f.password_field :password, autocomplete: "new-password" %>
+              <%= f.label :password, class:"block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.password_field :password, autocomplete: "new-password", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
               <% if @minimum_password_length %>
-                <br />
                 <em><%= @minimum_password_length %> characters minimum</em>
               <% end %>
             </div>
 
             <div class="field">
-              <%= f.label :password_confirmation %><br />
-              <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+              <%= f.label :password_confirmation, class:"block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
             </div>
           </div>
         </div>

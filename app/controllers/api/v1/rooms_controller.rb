@@ -29,9 +29,10 @@ module Api
         @user = User.find_by(id: params.dig("user_id"))
         return if @user.present?
 
-        @user = User.create!(
+        @user = User.find_or_create_by!(
           name: params["name"],
           email: params["email"],
+          language: JSON.parse(params["language"])["value"],
           user_type: :external
         )
       end

@@ -9,7 +9,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    debugger
     super
   end
 
@@ -33,7 +32,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [
-      :name, :email, :current_password, :password, :password_confirmation,
+      :name, :email, :current_password, :password, :password_confirmation, :language,
       :notification_conversation_assigned_email, :notification_conversation_assigned_push,
       :notification_message_received_email, :notification_message_received_push,
       :notification_message_reminder_email, :notification_message_reminder_push,

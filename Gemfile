@@ -78,3 +78,13 @@ gem "devise", "~> 4.9"
 gem "tailwindcss-rails", "~> 2.6"
 
 gem 'devise_invitable', '~> 2.0.0'
+
+gem 'sidekiq'
+
+gem 'httparty'
+
+# Check if the language is english
+gem 'whatlanguage'
+
+# List languages in their own languages
+gem 'i18n_data'
