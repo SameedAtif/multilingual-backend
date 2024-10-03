@@ -6,11 +6,13 @@ module Api
       def show
         @org = Organization.find_by!(website: params[:website])
         render json: {
+          name: @org.name,
           background_color:  @org.background_color,
           text_color: @org.text_color,
           button_color: @org.button_color,
           icon: @org.icon,
-          label: @org.label
+          label: Organization::VALID_LABELS[@org.label.to_sym],
+          greeting_message: @org.greeting_message
         }, status: :ok
       end
     end
