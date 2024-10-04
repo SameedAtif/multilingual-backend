@@ -4,6 +4,8 @@ class Organization < ApplicationRecord
   has_many :users
   has_many :rooms
 
+  has_one :current_assignee, :class_name => 'User'
+
   VALID_ICONS = {
     message_square_more: 'Message',
     message_circle_question: 'Question',

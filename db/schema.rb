@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_02_080639) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_04_125903) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -107,6 +107,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_02_080639) do
     t.text "labels", array: true
     t.integer "status", default: 0
     t.bigint "organization_id"
+    t.datetime "read_at"
     t.index ["assignee_id"], name: "index_rooms_on_assignee_id"
     t.index ["organization_id"], name: "index_rooms_on_organization_id"
   end

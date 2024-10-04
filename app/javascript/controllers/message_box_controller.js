@@ -26,8 +26,8 @@ export default class extends Controller {
           },
           disconnected() {
             // Called when the subscription has been terminated by the server
-            // console.log("RoomChannel disconnected");
-            this.uninstall();
+            console.log("RoomChannel disconnected");
+            // this.uninstall();
           }
         });
       }

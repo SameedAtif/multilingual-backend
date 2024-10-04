@@ -156,31 +156,6 @@
             </svg>
           </div>
       <% end %>
-      <%= button_to rooms_path,
-        method: :get,
-        local: false,
-        remote: true,
-        params: {switch_tab: 'true'},
-        form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
-          <div class="flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="w-4 h-4"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="m4.9 4.9 14.2 14.2"></path>
-            </svg>
-            <span>Blocked</span>
-          </div>
-      <% end %>
     </div>
     <%= button_to settings_path,
         method: :get,

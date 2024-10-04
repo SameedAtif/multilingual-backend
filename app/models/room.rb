@@ -1,7 +1,6 @@
 class Room < ApplicationRecord
   belongs_to :organization
-
-  has_one :assignee, :class_name => 'User'
+  belongs_to :assignee, :class_name => 'User'
 
   has_many :messages, dependent: :destroy
   has_many :participants, dependent: :destroy

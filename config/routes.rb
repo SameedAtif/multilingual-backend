@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       get 'settings'
     end
   end
-  resources :rooms do
+  resources :rooms, only: [:show, :update, :index] do
     collection do
       get 'appearance_setting'
     end
