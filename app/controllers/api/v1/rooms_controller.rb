@@ -33,7 +33,8 @@ module Api
           name: params["name"],
           email: params["email"],
           language: JSON.parse(params["language"])["value"],
-          user_type: :external
+          user_type: :external,
+          confirmed_at: DateTime.current
         )
       end
 

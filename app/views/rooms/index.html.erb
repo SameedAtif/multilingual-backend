@@ -69,7 +69,7 @@
           method: :get,
           local: false,
           remote: true,
-          params: {switch_tab: 'true'},
+          params: {self_assigned: 'true'},
           form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
             <div class="flex items-center space-x-2">
               <svg
@@ -94,7 +94,7 @@
         method: :get,
         local: false,
         remote: true,
-        params: {switch_tab: 'true'},
+        params: {unassigned: 'true'},
         form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
           <div class="flex items-center space-x-2">
             <svg
@@ -121,7 +121,7 @@
         method: :get,
         local: false,
         remote: true,
-        params: {switch_tab: 'true'},
+        params: {read_at: 'true'},
         form_class: 'rounded-md hover:bg-muted hover:text-muted-foreground hover:bg-gray-100 px-2 py-1 cursor-pointer' do %>
           <div class="flex items-center space-x-2">
             <svg

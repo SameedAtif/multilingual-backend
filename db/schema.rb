@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_04_125903) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -157,6 +157,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_04_125903) do
     t.boolean "notification_message_reminder_push"
     t.boolean "message_on_enter_key"
     t.string "language", default: "en", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"

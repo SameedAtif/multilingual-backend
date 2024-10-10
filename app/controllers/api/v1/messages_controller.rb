@@ -31,10 +31,12 @@ module Api
         @user = User.find_by(id: params.dig("user_id"))
         return if @user.present?
 
-        @user = User.find_or_create_by(
+        @user = User.find_or_create_by!(
           name: params["name"],
           email: params["email"],
-          language: params["language"]
+          language: JSON.parse(params["language"])["value"],
+          user_type: :external,
+          confirmed_at: DateTime.current
         )
       end
     end
