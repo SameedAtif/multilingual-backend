@@ -1,25 +1,25 @@
 class AddTokenBasedAuth < ActiveRecord::Migration[7.1]
   def change
-    create_table :blacklisted_tokens do |t|
+    create_table :blacklisted_tokens, id: :uuid do |t|
       t.string :jti
-      t.belongs_to :user, null: false, foreign_key: true
+      t.belongs_to :user, null: false, foreign_key: true, type: :uuid
       t.datetime :exp
 
       t.timestamps
     end
 
-    create_table :whitelisted_tokens do |t|
+    create_table :whitelisted_tokens, id: :uuid do |t|
       t.string :jti
-      t.belongs_to :user, null: false, foreign_key: true
+      t.belongs_to :user, null: false, foreign_key: true, type: :uuid
       t.datetime :exp
 
       t.timestamps
     end
 
-    create_table :refresh_tokens do |t|
+    create_table :refresh_tokens, id: :uuid do |t|
       t.string :crypted_token
       t.datetime :expires_at
-      t.belongs_to :user, null: false, foreign_key: true
+      t.belongs_to :user, null: false, foreign_key: true, type: :uuid
 
       t.timestamps
     end

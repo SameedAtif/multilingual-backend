@@ -12,21 +12,12 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "_prisma_migrations", id: { type: :string, limit: 36 }, force: :cascade do |t|
-    t.string "checksum", limit: 64, null: false
-    t.timestamptz "finished_at"
-    t.string "migration_name", limit: 255, null: false
-    t.text "logs"
-    t.timestamptz "rolled_back_at"
-    t.timestamptz "started_at", default: -> { "now()" }, null: false
-    t.integer "applied_steps_count", default: 0, null: false
-  end
-
-  create_table "blacklisted_tokens", force: :cascade do |t|
+  create_table "blacklisted_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "jti"
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.datetime "exp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -34,9 +25,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.index ["user_id"], name: "index_blacklisted_tokens_on_user_id"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "room_id", null: false
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "source_language"
@@ -47,11 +38,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.bigint "resource_id", null: false
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "resource_id", null: false
     t.string "resource_type", null: false
     t.string "user_type", null: false
-    t.bigint "user_id"
+    t.uuid "user_id"
     t.string "notification_type", null: false
     t.jsonb "extra"
     t.datetime "read_at"
@@ -62,11 +53,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "organizations", force: :cascade do |t|
+  create_table "organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "website", default: "", null: false
-    t.bigint "owner_id", null: false
-    t.bigint "current_assignee_id"
+    t.uuid "owner_id", null: false
+    t.uuid "current_assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "background_color"
@@ -79,34 +70,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.index ["owner_id"], name: "index_organizations_on_owner_id"
   end
 
-  create_table "participants", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "room_id", null: false
+  create_table "participants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_participants_on_room_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
-  create_table "refresh_tokens", force: :cascade do |t|
+  create_table "refresh_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "crypted_token"
     t.datetime "expires_at"
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["crypted_token"], name: "index_refresh_tokens_on_crypted_token", unique: true
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "rooms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.boolean "is_private", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "assignee_id"
+    t.uuid "assignee_id"
     t.text "labels", array: true
     t.integer "status", default: 0
-    t.bigint "organization_id"
+    t.uuid "organization_id"
     t.datetime "read_at"
     t.index ["assignee_id"], name: "index_rooms_on_assignee_id"
     t.index ["organization_id"], name: "index_rooms_on_organization_id"
@@ -119,7 +110,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.string "scope"
     t.datetime "expires"
     t.string "access_token"
-    t.bigint "user_id"
+    t.uuid "user_id"
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -130,7 +121,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.index ["user_id"], name: "index_shopify_sessions_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -141,7 +132,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.datetime "updated_at", null: false
     t.datetime "token_issued_at"
     t.integer "user_type", default: 0, null: false
-    t.bigint "organization_id"
+    t.uuid "organization_id"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -167,9 +158,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "whitelisted_tokens", force: :cascade do |t|
+  create_table "whitelisted_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "jti"
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.datetime "exp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

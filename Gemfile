@@ -88,3 +88,5 @@ gem 'whatlanguage'
 
 # List languages in their own languages
 gem 'i18n_data'
+
+gem "uuid7", "~> 0.2.0"

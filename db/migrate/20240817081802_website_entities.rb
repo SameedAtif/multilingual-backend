@@ -1,20 +1,20 @@
 class WebsiteEntities < ActiveRecord::Migration[7.1]
   def change
     # Organization to scope rooms
-    create_table :organizations do |t|
+    create_table :organizations, id: :uuid do |t|
       t.string :name, null: false, default: ""
       t.string :website, null: false, default: ""
-      t.belongs_to :owner, null: false, foreign_key: {to_table: :users}
-      t.references :current_assignee, foreign_key: { to_table: :users }
+      t.belongs_to :owner, null: false, foreign_key: {to_table: :users}, type: :uuid
+      t.references :current_assignee, foreign_key: { to_table: :users }, type: :uuid
 
       t.timestamps
     end
     # User to scope to Organizations
     add_column :users, :user_type, :integer, null: false, default: 0
-    add_reference :users, :organization
+    add_reference :users, :organization, type: :uuid
 
     # Rooms assignee
-    add_reference :rooms, :assignee, foreign_key: { to_table: :users }
+    add_reference :rooms, :assignee, foreign_key: { to_table: :users }, type: :uuid
 
     # Messages source and targe language and text
     add_column :messages, :source_language, :string

@@ -282,6 +282,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    uuid7 (0.2.0)
+      zeitwerk (~> 2.4)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -328,6 +330,7 @@ DEPENDENCIES
   tailwindcss-rails (~> 2.6)
   turbo-rails
   tzinfo-data
+  uuid7 (~> 0.2.0)
   web-console
   whatlanguage
 

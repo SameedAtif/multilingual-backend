@@ -8,7 +8,7 @@ class CreateShopifySessionTable < ActiveRecord::Migration[7.1]
       t.string :scope
       t.datetime :expires
       t.string :access_token
-      t.belongs_to :user, foreign_key: true
+      t.belongs_to :user, foreign_key: true, type: :uuid
       t.string :first_name
       t.string :last_name
       t.string :email

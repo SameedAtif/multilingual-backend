@@ -24,11 +24,11 @@ class Invitable < ActiveRecord::Migration[7.1]
     add_column :organizations, :label, :string
     add_column :organizations, :greeting_message, :string
 
-    create_table :notifications do |t|
-      t.bigint  :resource_id, null: false
+    create_table :notifications, id: :uuid do |t|
+      t.uuid  :resource_id, null: false
       t.string  :resource_type, null: false
       t.string  :user_type, null: false
-      t.belongs_to :user, foreign_key: true
+      t.belongs_to :user, foreign_key: true, type: :uuid
       t.string  :notification_type, null: false
       t.jsonb  :extra
       t.datetime  :read_at
