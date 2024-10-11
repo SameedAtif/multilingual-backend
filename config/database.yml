@@ -14,10 +14,13 @@
 #
 default: &default
   adapter: postgresql
+  host:     <%= ENV['POSTGRES_HOST'] || 'localhost' %>
+  port:     <%= ENV['POSTGRES_PORT'] || 5432 %>
+  pool:     <%= ENV['POSTGRES_POOL'] || 5 %>
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['POSTGRES_USERNAME'] || 'postgres' %>
+  password: <%= ENV['POSTGRES_PASSWORD'] || 'postgres' %>
+  timeout: 5000
 
 development:
   <<: *default
@@ -80,5 +83,3 @@ test:
 production:
   <<: *default
   database: multilingual_backend_production
-  username: multilingual_backend
-  password: <%= ENV["MULTILINGUAL_BACKEND_DATABASE_PASSWORD"] %>

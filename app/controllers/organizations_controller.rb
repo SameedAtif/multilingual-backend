@@ -12,6 +12,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(permitted_params)
     @organization.owner = current_user
     if @organization.save
+      flash[:success] = "Organization created"
       redirect_to root_path and return
     else
       render :new
@@ -20,7 +21,11 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization = Organization.find(params[:id])
-    @organization.update(permitted_params)
+    if @organization.update(permitted_params)
+      flash[:success] = "Organization updated"
+    else
+      flash[:alert] = @organization.errors.full_messages.to_sentence
+    end
     redirect_back fallback_location: root_path
   end
 
