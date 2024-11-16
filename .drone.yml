@@ -1,0 +1,51 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  # Build the Rails app image
+  - name: build-app
+    image: plugins/docker
+    settings:
+      registry: registry.sw.fluentassist.io
+      repo: registry.sw.fluentassist.io/fluentassist/app
+      dockerfile: .ci/docker/Dockerfile.rails
+      context: .
+      tags: latest
+      username:
+        from_secret: registry_username
+      password:
+        from_secret: registry_password
+
+  # Build the web image
+  - name: build-web
+    image: plugins/docker
+    settings:
+      registry: registry.sw.fluentassist.io
+      repo: registry.sw.fluentassist.io/fluentassist/web
+      dockerfile: .ci/docker/Dockerfile.web
+      context: .
+      tags: latest
+      username:
+        from_secret: registry_username
+      password:
+        from_secret: registry_password
+
+  # Build the Sidekiq image
+  - name: build-sidekiq
+    image: plugins/docker
+    settings:
+      registry: registry.sw.fluentassist.io
+      repo: registry.sw.fluentassist.io/fluentassist/sidekiq
+      dockerfile: .ci/docker/Dockerfile.sidekiq
+      context: .
+      tags: latest
+      username:
+        from_secret: registry_username
+      password:
+        from_secret: registry_password
+
+trigger:
+  event:
+    - push
+    - pull_request
