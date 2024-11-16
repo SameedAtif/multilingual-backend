@@ -45,6 +45,19 @@ steps:
       password:
         from_secret: registry_password
 
+  - name: deploy
+    image: appleboy/drone-ssh
+    settings:
+      host: sw.fluentassist.io
+      port: 2222
+      username: swarm
+      key:
+        from_secret: swarm_ssh_key
+      script:
+        - docker service update --image registry.sw.fluentassist.io/fluentassist/app:latest fluentassist_app --with-registry-auth
+        - docker service update --image registry.sw.fluentassist.io/fluentassist/sidekiq:latest fluentassist_sidekiq --with-registry-auth
+        - docker service update --image registry.sw.fluentassist.io/fluentassist/web:latest fluentassist_web --with-registry-auth
+
 trigger:
   event:
     - push
