@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
     @organization.owner = current_user
     if @organization.save
       flash[:success] = "Organization created"
-      redirect_to root_path and return
+      redirect_to rooms_path and return
     else
       render :new
     end
@@ -26,7 +26,7 @@ class OrganizationsController < ApplicationController
     else
       flash[:alert] = @organization.errors.full_messages.to_sentence
     end
-    redirect_back fallback_location: root_path
+    redirect_back fallback_location: rooms_path
   end
 
   def settings; end
