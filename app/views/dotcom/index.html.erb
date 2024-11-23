@@ -1,22 +1,21 @@
 <%= render partial: 'shared/navbar' %>
-<section class="-mt-12 hero relative overflow-hidden">
+<section id="home" class="hero relative overflow-hidden">
   <div class="pt-28 md:pt-36 2xl:pt-52 pb-24 px-2 md:px-3 text-center">
     <h1 class="mx-auto max-w-4xl font-display text-4xl font-semibold text-slate-900 sm:text-6xl xl:text-7xl">
       Delightful customer <span class="md:block"> relationships, <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#007cf0] to-[#32b7e4]"> at scale</span></span>
     </h1>
-    <p class="mx-auto mt-4 md:mt-6 max-w-2xl px-5 md:px-0 text-lg sm:text-2xl tracking-tight text-slate-700"> Chatwoot gives you all the tools to manage conversations, build relationships and delight your customers from one place. </p>
+    <p class="mx-auto mt-4 md:mt-6 max-w-2xl px-5 md:px-0 text-lg sm:text-2xl tracking-tight text-slate-700"> FluentAssist gives you all the tools to manage conversations, build relationships and delight your customers from one place. </p>
     <div class="max-w-max grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mx-auto mt-8 z-20">
-      <a href="https://app.chatwoot.com/app/auth/signup?utm_source=landing-hero" class="inline-flex justify-center font-display items-center space-x-2 rounded-lg px-6 py-3 text-base md:text-lg font-medium bg-sky-500 text-white shadow-lg shadow-blue-700/50 border border-sky-500 button-1 relative group">
-        <span class="button-text group-hover:-translate-x-2 transition-transform duration-300 ease-out">Create a free account</span>
+      <a href="<%= new_user_registration_path %>" class="inline-flex justify-center font-display items-center space-x-2 rounded-lg px-6 py-3 text-base md:text-lg font-medium bg-sky-500 text-white shadow-lg shadow-blue-700/50 border border-sky-500 button-1 relative group">
+        <span class="button-text group-hover:-translate-x-2 transition-transform duration-300 ease-out">Create an account</span>
       </a>
-      <a href="/request-a-demo" class="flex justify-center font-display space-x-2 rounded-lg px-6 py-3 text-base md:text-lg font-medium bg-white border border-gray-100 shadow-lg will-change-transform">
+      <a href="<%= contact_us_path %>" class="flex justify-center font-display space-x-2 rounded-lg px-6 py-3 text-base md:text-lg font-medium bg-white border border-gray-100 shadow-lg will-change-transform">
         <span>Request a demo</span>
       </a>
     </div>
-    <p class="text-center mt-6 text-slate-600 tracking-tight text-base"> To self-host Chatwoot, <a href="/deploy" class="">click here.</a></p>
   </div>
 </section>
-<section class="py-12 px-4" data-v-8647c1c6="">
+<section id="features" class="py-12 px-4" data-v-8647c1c6="">
   <div class="max-w-6xl mx-auto" data-v-8647c1c6="">
     <div class="mt-8 space-y-8">
       <div class="feature-card gradient feature-card" data-v-8647c1c6="" data-v-8e3a3efa="">
@@ -26,6 +25,38 @@
           </div>
           <div class="relative" data-v-8e3a3efa="">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8" data-v-8e3a3efa="">
+              <script>
+                function showHideChatBox(e) {
+                  e.preventDefault();
+                  $('#chat-container').slideToggle("slow");;
+                  $('#cross-icon').toggle();
+                  $('#message-icon').toggle();
+                  $('#chat-text').toggle();
+                  return false;
+                }
+
+                $(document).ready(function() {
+                  $('#background-color').on('input', function() {
+                    let color = $(this).val();
+                    $('#send-button').css("background-color", color);
+                    $('#open-chat').css("background-color", color);
+                  });
+
+                  $('#label-select').on('change', function() {
+                    const selectedValue = $('#label-select option:selected')[0].value;
+                    $('#chat-text').html(`Typically replies in ${selectedValue}`);
+                  });
+                  $('#greeting-message-field').on('keyup change', function() {
+                    const selectedValue = $('#greeting-message-field')[0].value;
+                    $('#greeting-message').html(selectedValue);
+                  });
+
+                  $('#welcome-tagline-field').on('keyup change', function() {
+                    const selectedValue = $('#welcome-tagline-field')[0].value;
+                    $('#welcome-tagline').html(selectedValue);
+                  });
+                });
+              </script>
               <div data-v-8e3a3efa="">
                 <h2 class="text-3xl font-semibold" data-v-8e3a3efa=""> A live chat that fits your brand </h2>
                 <p class="max-w-lg my-4 text-slate-600" data-v-8e3a3efa=""> Engage with your website visitors in real time. Add a live chat widget to your website that complements your brand. </p>
@@ -33,17 +64,17 @@
                   <div class="space-y-4" data-v-8e3a3efa="">
                     <label class="block" data-v-8e3a3efa="">
                       <span class="text-gray-500 font-medium text-sm" data-v-8e3a3efa="">Greeting Message</span>
-                      <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" value="Hello there 👋" data-v-8e3a3efa="">
+                      <input id="greeting-message-field" type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="" value="Hello there 👋" data-v-8e3a3efa="">
                     </label>
                     <div data-v-8e3a3efa="">
                       <label for="comment" class="block text-sm font-medium text-gray-700" data-v-8e3a3efa="">Welcome tagline</label>
                       <div class="mt-1" data-v-8e3a3efa="">
-                        <textarea name="comment" id="comment" class="form-textarea block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" data-v-8e3a3efa="">We are here to help you with your questions. Ask us anything, or share your feedback.</textarea>
+                        <textarea id="welcome-tagline-field" name="comment" id="comment" class="form-textarea block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" data-v-8e3a3efa="">We are here to help you with your questions. Ask us anything, or share your feedback.</textarea>
                       </div>
                     </div>
                     <label class="block" data-v-8e3a3efa="">
                       <span class="text-gray-500 font-medium text-sm" data-v-8e3a3efa="">Reply Time</span>
-                      <select class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" data-v-8e3a3efa="">
+                      <select id="label-select" class="form-select block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" data-v-8e3a3efa="">
                         <option value="a few minutes" data-v-8e3a3efa="" selected="">In a few minutes</option>
                         <option value="a few hours" data-v-8e3a3efa="">In a few hours</option>
                         <option value="a day" data-v-8e3a3efa="">In a day</option>
@@ -51,22 +82,8 @@
                     </label>
                     <label class="block" data-v-8e3a3efa="">
                       <span class="text-gray-500 font-medium text-sm" data-v-8e3a3efa="">Widget Color</span>
-                      <input type="color" class="appearance-none bg-none form-input block w-full lg:w-1/6 mt-1 h-12 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="#1F93FF" data-v-8e3a3efa="">
+                      <input id="background-color" type="color" class="appearance-none bg-none form-input block w-full lg:w-1/6 mt-1 h-12 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="#1F93FF" data-v-8e3a3efa="">
                     </label>
-                    <div data-v-8e3a3efa="">
-                      <p class="text-gray-500 font-medium text-sm" data-v-8e3a3efa=""> Widget Bubble position </p>
-                      <div class="flex items-center mt-1 max-w-max bg-white rounded-md overflow-hidden border" data-v-8e3a3efa="">
-                        <button class="shadow-sm px-4 py-2 rounded-l-md focus:outline-none" data-v-8e3a3efa=""> Left </button>
-                        <button class="bg-woot-dark text-white shadow-sm px-4 py-2 rounded-r-md focus:outline-none" data-v-8e3a3efa=""> Right </button>
-                      </div>
-                    </div>
-                    <div data-v-8e3a3efa="">
-                      <p class="text-gray-500 font-medium text-sm" data-v-8e3a3efa=""> Widget Bubble type </p>
-                      <div class="flex items-center mt-1 max-w-max bg-white rounded-md overflow-hidden border" data-v-8e3a3efa="">
-                        <button class="bg-woot-dark text-white shadow-sm px-4 py-2 focus:outline-none" data-v-8e3a3efa=""> Standard </button>
-                        <button class="shadow-sm px-4 py-2 focus:outline-none" data-v-8e3a3efa=""> Expanded </button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -74,8 +91,8 @@
                 <div class="py-12 w-full sm:w-8/12 mx-auto" data-v-8e3a3efa="">
                   <div class="h-[500px] bg-slate-100/50 backdrop-blur rounded-xl shadow-2xl border overflow-hidden flex flex-col" data-v-8e3a3efa="">
                     <div class="bg-white/75 backdrop-blur-0 w-full py-8 px-6" data-v-8e3a3efa="">
-                      <h2 class="text-3xl font-medium text-slate-700" data-v-8e3a3efa="">Hello there 👋</h2>
-                      <p class="text-slate-500 mt-4" data-v-8e3a3efa="">We are here to help you with your questions. Ask us anything, or share your feedback.</p>
+                      <h2 id="greeting-message" class="text-3xl font-medium text-slate-700" data-v-8e3a3efa="">Hello there 👋</h2>
+                      <p id="welcome-tagline" class="text-slate-500 mt-4" data-v-8e3a3efa="">We are here to help you with your questions. Ask us anything, or share your feedback.</p>
                     </div>
                     <div class="flex-grow flex items-end py-8 px-6" data-v-8e3a3efa="">
                       <div class="space-y-4 w-full" data-v-8e3a3efa="">
@@ -85,18 +102,18 @@
                               <span class="h-3 w-3 bg-green-400 inline-block rounded-full ring-2 ring-green-400/50" data-v-8e3a3efa=""></span>
                               <p class="text-lg" data-v-8e3a3efa="">We're online</p>
                             </div>
-                            <p class="text-xs text-slate-500" data-v-8e3a3efa=""> Typically replies in a few minutes</p>
+                            <p id="chat-text" class="text-xs text-slate-500" data-v-8e3a3efa=""> Typically replies in a few minutes</p>
                           </div>
                           <div class="h-12 w-12 rounded-full overflow-hidden border-2 border-gray-300" data-v-8e3a3efa="">
                             <img src="/images/home/avatar.webp" alt="Avatar" class="h-full w-full object-cover" loading="lazy" data-v-8e3a3efa="">
                           </div>
                         </div>
-                        <button class="w-full py-2 px-4 rounded-lg text-white" style="background-color:#1F93FF;" data-v-8e3a3efa=""> Start Conversation </button>
+                        <button id="send-button" class="w-full py-2 px-4 rounded-lg text-white" style="background-color:#1F93FF;" data-v-8e3a3efa=""> Start Conversation </button>
                       </div>
                     </div>
                   </div>
                   <div class="mt-4" data-v-8e3a3efa="">
-                    <div style="background-color:#1F93FF;" class="ml-auto h-16 w-16 rounded-full shadow-2xl border flex items-center justify-center" data-v-8e3a3efa="">
+                    <div id="open-chat" style="background-color:#1F93FF;" class="ml-auto h-16 w-16 rounded-full shadow-2xl border flex items-center justify-center" data-v-8e3a3efa="">
                       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAUVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////8IN+deAAAAGnRSTlMAAwgJEBk0TVheY2R5eo+ut8jb5OXs8fX2+cjRDTIAAADsSURBVHgBldZbkoMgFIThRgQv8SKKgGf/C51UnJqaRI30/9zfe+NQUQ3TvG7bOk9DVeCmshmj/CuOTYnrdBfkUOg0zlOtl9OWVuEk4+QyZ3DIevmSt/ioTvK1VH/s5bY3YdM9SBZ/mUUyWgx+U06ycgp7D8msxSvtc4HXL9BLdj2elSEfhBJAI0QNgJEBI1BEBsQClVBVGDgwYOLAhJkDM1YOrNg4sLFAsLJgZsHEgoEFFQt0JAFGFjQsKAMJ0LFAexKgZYFyJIDxJIBNJEDNAtSJBLCeBDCOBFAPzwFA94ED+zmhwDO9358r8ANtIsMXi7qVAwAAAABJRU5ErkJggg==" alt="chatwoot-logo" class="h-6 w-6" data-v-8e3a3efa="">
                     </div><!---->
                   </div>
@@ -108,4 +125,68 @@
       </div>
     </div>
   </div>
+</section>
+<section class="pt-32 pb-24 px-4">
+   <div class="max-w-6xl mx-auto rounded-xl transition-colors overflow-hidden" style="background-color:#f0f9ff;">
+      <div class="max-w-3xl p-8 pb-0">
+         <h2 class="font-display tracking-tight text-4xl font-semibold text-slate-700 sm:text-4xl">Multilingual support that goes beyond simple translations</h2>
+      </div>
+      <div>
+         <div class="mt-6">
+            <div class="mt-8 p-8 pt-0">
+               <!--[-->
+               <div id="headlessui-tabs-panel-387" role="tabpanel" tabindex="0" data-headlessui-state="selected" aria-labelledby="headlessui-tabs-tab-383">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                     <div class="space-y-4">
+                        <p class="text-2xl font-semibold">Engage customers in their own language with Fluent Assists multilingual chat solutions.</p>
+                        <p class="text-slate-600">Learn more about your customers using their words to have a better understanding of:</p>
+                        <ul class="space-y-3">
+                           <!--[-->
+                           <li class="flex items-center space-x-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5 text-woot" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-182fbf46="">
+                                 <g fill="currentColor">
+                                    <path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96" opacity=".2"></path>
+                                    <path d="M173.66 98.34a8 8 0 0 1 0 11.32l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 0M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88 88 0 1 0-88 88a88.1 88.1 0 0 0 88-88"></path>
+                                 </g>
+                              </svg>
+                              <span class="font-medium">Intent</span>
+                           </li>
+                           <li class="flex items-center space-x-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5 text-woot" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-182fbf46="">
+                                 <g fill="currentColor">
+                                    <path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96" opacity=".2"></path>
+                                    <path d="M173.66 98.34a8 8 0 0 1 0 11.32l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 0M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88 88 0 1 0-88 88a88.1 88.1 0 0 0 88-88"></path>
+                                 </g>
+                              </svg>
+                              <span class="font-medium">Slang</span>
+                           </li>
+                           <li class="flex items-center space-x-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5 text-woot" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-182fbf46="">
+                                 <g fill="currentColor">
+                                    <path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96" opacity=".2"></path>
+                                    <path d="M173.66 98.34a8 8 0 0 1 0 11.32l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 0M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88 88 0 1 0-88 88a88.1 88.1 0 0 0 88-88"></path>
+                                 </g>
+                              </svg>
+                              <span class="font-medium">Typos</span>
+                           </li>
+                           <li class="flex items-center space-x-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon h-5 w-5 text-woot" style="" width="1em" height="1em" viewBox="0 0 256 256" data-v-182fbf46="">
+                                 <g fill="currentColor">
+                                    <path d="M224 128a96 96 0 1 1-96-96a96 96 0 0 1 96 96" opacity=".2"></path>
+                                    <path d="M173.66 98.34a8 8 0 0 1 0 11.32l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 0M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88 88 0 1 0-88 88a88.1 88.1 0 0 0 88-88"></path>
+                                 </g>
+                              </svg>
+                              <span class="font-medium">Context</span>
+                           </li>
+                        </ul>
+                     </div>
+                     <div><img src="/features/reports.webp" class="rounded shadow-xl" load="lazy" alt="Reports"></div>
+                  </div>
+               </div>
+               <span aria-hidden="true" style="position:fixed;top:1;left:1;width:1;height:0;padding:0;margin:-1;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0;" id="headlessui-tabs-panel-388" role="tabpanel" tabindex="-1" aria-labelledby="headlessui-tabs-tab-384"></span><span aria-hidden="true" style="position:fixed;top:1;left:1;width:1;height:0;padding:0;margin:-1;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0;" id="headlessui-tabs-panel-389" role="tabpanel" tabindex="-1" aria-labelledby="headlessui-tabs-tab-385"></span><span aria-hidden="true" style="position:fixed;top:1;left:1;width:1;height:0;padding:0;margin:-1;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0;" id="headlessui-tabs-panel-390" role="tabpanel" tabindex="-1" aria-labelledby="headlessui-tabs-tab-386"></span><!--]-->
+            </div>
+            <!--]--><!--]-->
+         </div>
+      </div>
+   </div>
 </section>

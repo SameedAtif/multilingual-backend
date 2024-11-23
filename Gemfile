@@ -92,3 +92,6 @@ gem 'i18n_data'
 gem "uuid7", "~> 0.2.0"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
+
+# Contact support
+gem 'mail_form'

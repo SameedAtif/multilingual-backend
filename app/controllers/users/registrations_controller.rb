@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  skip_before_action :authenticate_user!, only: [:create, :new]
+
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_permitted_parameters, only: [:update]
 

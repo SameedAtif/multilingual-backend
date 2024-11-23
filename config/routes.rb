@@ -45,5 +45,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :contacts, only: [:create]
+
   get '/settings' => 'rooms#settings', as: :settings
+
+  get '/request-a-demo' => 'dotcom#contact_us', as: :contact_us
 end
