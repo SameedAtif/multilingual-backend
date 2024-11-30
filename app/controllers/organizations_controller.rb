@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
     @organization.owner = current_user
     if @organization.save
       flash[:success] = "Organization created"
-      redirect_to rooms_path and return
+      redirect_to new_subscription_path and return
     else
       render :new
     end

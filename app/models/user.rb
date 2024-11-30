@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
 
-  has_one :owned_org, foreign_key: "owner_id", class_name: "Organization"
+  has_one :owned_org, foreign_key: "owner_id", class_name: "Organization", dependent: :destroy
 
   has_many :messages, dependent: :destroy
   has_many :participants, dependent: :destroy
