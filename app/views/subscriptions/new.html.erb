@@ -23,7 +23,7 @@
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (response) {
-              console.log('Success:', response);
+              window.location.href = "<%=rooms_path%>";
             },
             error: function (xhr, status, error) {
               console.error('Error:', error);
@@ -63,18 +63,6 @@
       });
     }
 
-    function on_change(el){
-      let selectedOption = el.target.checked;
-      console.log(el.target);
-      if (selectedOption) {
-        document.getElementById('yearly-price').style.display = 'block';
-        document.getElementById('monthly-price').style.display = 'none';
-      } else {
-        document.getElementById('yearly-price').style.display = 'none';
-        document.getElementById('monthly-price').style.display = 'block';
-      }
-    }
-
     $("#show-monthly").on("click", function() {
       slideSection("#subscription-options", "#card-form")
       openCheckout(monthItemsList);
@@ -84,6 +72,18 @@
       openCheckout(yearItemsList);
     });
   });
+
+  function on_change(el){
+    let selectedOption = el.target.checked;
+    console.log(el.target);
+    if (selectedOption) {
+      document.getElementById('yearly-price').style.display = 'block';
+      document.getElementById('monthly-price').style.display = 'none';
+    } else {
+      document.getElementById('yearly-price').style.display = 'none';
+      document.getElementById('monthly-price').style.display = 'block';
+    }
+  }
 </script>
 
 <section class="px-4">
