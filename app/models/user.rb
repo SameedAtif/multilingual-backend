@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :refresh_tokens, dependent: :delete_all
   has_many :whitelisted_tokens, dependent: :delete_all
   has_many :blacklisted_tokens, dependent: :delete_all
+  has_many :paddle_customers, dependent: :destroy
+  has_many :paddle_subscriptions, dependent: :destroy
+  has_many :paddle_checkout_responses, dependent: :destroy
 
   enum user_type: {
     internal: 0, # We have a password for them

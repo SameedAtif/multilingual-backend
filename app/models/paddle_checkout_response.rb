@@ -1,0 +1,3 @@
+class PaddleCheckoutResponse < ApplicationRecord
+
+end

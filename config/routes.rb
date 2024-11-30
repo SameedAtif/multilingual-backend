@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   resources :contacts, only: [:create]
 
-  resources :subscriptions, only: [:new]
+  resources :subscriptions, only: [:new, :create]
 
   get '/settings' => 'rooms#settings', as: :settings
 

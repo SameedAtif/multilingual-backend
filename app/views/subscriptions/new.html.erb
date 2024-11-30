@@ -14,7 +14,21 @@
       },
       eventCallback: function(data) {
         if (data.name == "checkout.completed") {
-          console.log(data);
+          $.ajax({
+            url: '<%= subscriptions_path %>',
+            method: 'POST',
+            headers: {
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            },
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+              console.log('Success:', response);
+            },
+            error: function (xhr, status, error) {
+              console.error('Error:', error);
+            }
+          });
         }
       }
     });

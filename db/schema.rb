@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_30_145946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -68,6 +68,78 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_135256) do
     t.string "greeting_message"
     t.index ["current_assignee_id"], name: "index_organizations_on_current_assignee_id"
     t.index ["owner_id"], name: "index_organizations_on_owner_id"
+  end
+
+  create_table "paddle_checkout_responses", force: :cascade do |t|
+    t.bigint "user_id"
+    t.jsonb "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_paddle_checkout_responses_on_user_id"
+  end
+
+  create_table "paddle_customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "customer_id"
+    t.string "email"
+    t.string "country_code"
+    t.string "postal_code"
+    t.string "city"
+    t.string "region"
+    t.string "first_line"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_paddle_customers_on_user_id"
+  end
+
+  create_table "paddle_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "product_id"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "paddle_subscription_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "paddle_subscription_id"
+    t.bigint "paddle_product_id"
+    t.bigint "paddle_customer_id"
+    t.string "price_id"
+    t.string "price_name"
+    t.string "billing_cycle_interval"
+    t.string "billing_cycle_frequency"
+    t.string "trial_period"
+    t.decimal "total"
+    t.decimal "tax"
+    t.decimal "discount"
+    t.decimal "subtotal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paddle_customer_id"], name: "index_paddle_subscription_items_on_paddle_customer_id"
+    t.index ["paddle_product_id"], name: "index_paddle_subscription_items_on_paddle_product_id"
+    t.index ["paddle_subscription_id"], name: "index_paddle_subscription_items_on_paddle_subscription_id"
+  end
+
+  create_table "paddle_subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "paddle_customer_id"
+    t.decimal "total"
+    t.decimal "tax"
+    t.decimal "discount"
+    t.decimal "subtotal"
+    t.string "status"
+    t.string "transaction_id"
+    t.string "transaction_status"
+    t.string "currency_code"
+    t.string "payment_method_type"
+    t.string "card_type"
+    t.string "card_last4"
+    t.string "card_expiry_month"
+    t.string "card_expiry_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paddle_customer_id"], name: "index_paddle_subscriptions_on_paddle_customer_id"
+    t.index ["user_id"], name: "index_paddle_subscriptions_on_user_id"
   end
 
   create_table "participants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
