@@ -39,6 +39,7 @@ class CreateTransactionTables < ActiveRecord::Migration[7.1]
       t.decimal :subtotal
 
       t.string :status
+      t.string :subscription_id
       t.string :transaction_id
       t.string :transaction_status
       t.string :currency_code
@@ -47,6 +48,8 @@ class CreateTransactionTables < ActiveRecord::Migration[7.1]
       t.string :card_last4
       t.string :card_expiry_month
       t.string :card_expiry_year
+
+      t.datetime :next_billed_at
 
       t.timestamps
     end

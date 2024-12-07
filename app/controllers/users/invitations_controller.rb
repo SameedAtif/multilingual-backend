@@ -3,6 +3,6 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # Permit the new params here.
   def invite_params
-    params.require(:invite).permit(:email,:name, :organizations_id)
+    params.require(:invite).permit(:email,:name, :organization_id)
   end
 end

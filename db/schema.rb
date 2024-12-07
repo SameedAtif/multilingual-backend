@@ -128,6 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_30_145946) do
     t.decimal "discount"
     t.decimal "subtotal"
     t.string "status"
+    t.string "subscription_id"
     t.string "transaction_id"
     t.string "transaction_status"
     t.string "currency_code"
@@ -136,6 +137,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_30_145946) do
     t.string "card_last4"
     t.string "card_expiry_month"
     t.string "card_expiry_year"
+    t.datetime "next_billed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["paddle_customer_id"], name: "index_paddle_subscriptions_on_paddle_customer_id"

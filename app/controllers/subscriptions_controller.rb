@@ -4,11 +4,18 @@ class SubscriptionsController < ApplicationController
   def new; end
 
   def create
+    create_paddle_response!
     create_paddle_products!
     paddle_customer = current_user.paddle_customers.find_or_create_by!(customer_information)
     @paddle_subscription = create_paddle_subscription!(paddle_customer)
 
     render json: { redirect_url: rooms_path }, status: :ok
+  end
+
+  def destroy
+    current_user.paddle_subscriptions.where(status: 'completed').last.unsubscribe!
+
+    redirect_to rooms_path, notice: "Your request is being processed"
   end
 
   private
@@ -39,5 +46,12 @@ class SubscriptionsController < ApplicationController
     obj.paddle_customer = paddle_customer
 
     obj.save!
+  end
+
+  def create_paddle_response!
+    PaddleCheckoutResponse.create!(
+      response: params,
+      user_id: current_user.id
+    )
   end
 end

@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :declare_room_variiables, only: [:show, :index, :update]
+  before_action :declare_room_variables, only: [:show, :index, :update]
+  before_action :verify_subscription
 
   def index
     respond_to do |format|
@@ -32,11 +33,23 @@ class RoomsController < ApplicationController
 
   private
 
+  def verify_subscription
+    subscription = current_org.owner.paddle_subscriptions.last
+    is_owner = current_org.owner == current_user
+
+    if subscription.status == "past_due" && is_owner
+      redirect_to edit_user_registration_path, alert: "Please pay the pending dues before proceeding. For any issues contact support."
+    elsif subscription.status == "past_due" && !is_owner
+      sign_out(current_user) # Signs out the current user
+      redirect_to root_path, notice: "You have been signed out. The organization has pending dues."
+    end
+  end
+
   def room_params
     params.require(:room).permit(:name, :read_at, :assignee_id, :status)
   end
 
-  def declare_room_variiables
+  def declare_room_variables
     @rooms = current_org.rooms.joins(:messages).where(filter_params).uniq
     @room_type = (params[:room_status].presence || 'open').to_s.capitalize
     @current_room = @first_room = @room = Room.find_by(id: params[:id]) || @rooms.first

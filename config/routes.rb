@@ -11,11 +11,14 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
-      resource :organization, only: [:show]
       resources :rooms
       resources :messages
-      resource :session, only: %i[create destroy update]
       resources :users, only: %i[show create]
+      resource :paddle, only: [] do
+        post :notification
+      end
+      resource :organization, only: [:show]
+      resource :session, only: %i[create destroy update]
     end
   end
 
@@ -48,7 +51,7 @@ Rails.application.routes.draw do
 
   resources :contacts, only: [:create]
 
-  resources :subscriptions, only: [:new, :create]
+  resources :subscriptions, only: [:new, :create, :destroy]
 
   get '/settings' => 'rooms#settings', as: :settings
 
