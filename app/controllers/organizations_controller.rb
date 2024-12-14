@@ -5,7 +5,7 @@ class OrganizationsController < ApplicationController
     if current_user.blank?
       redirect_to new_user_registration_path(request.parameters) and return
     end
-    @organization = Organization.new(name: params[:name], website: params[:website])
+    @organization = Organization.new(name: params[:name], website: params[:website], client_id: SecureRandom.hex(32))
   end
 
   def create

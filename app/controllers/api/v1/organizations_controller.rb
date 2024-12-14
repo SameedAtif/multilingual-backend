@@ -4,7 +4,7 @@ module Api
       skip_before_action :authenticate, only: %i[show]
 
       def show
-        @org = Organization.find_by!(website: params[:website])
+        @org = Organization.find_by!(website: params[:website], client_id: params[:client_id])
         render json: {
           name: @org.name,
           background_color:  @org.background_color,

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_30_145946) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_14_154819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "_prisma_migrations", id: { type: :string, limit: 36 }, force: :cascade do |t|
+    t.string "checksum", limit: 64, null: false
+    t.timestamptz "finished_at"
+    t.string "migration_name", limit: 255, null: false
+    t.text "logs"
+    t.timestamptz "rolled_back_at"
+    t.timestamptz "started_at", default: -> { "now()" }, null: false
+    t.integer "applied_steps_count", default: 0, null: false
+  end
 
   create_table "blacklisted_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "jti"
@@ -66,6 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_30_145946) do
     t.string "icon"
     t.string "label"
     t.string "greeting_message"
+    t.string "client_id"
     t.index ["current_assignee_id"], name: "index_organizations_on_current_assignee_id"
     t.index ["owner_id"], name: "index_organizations_on_owner_id"
   end
