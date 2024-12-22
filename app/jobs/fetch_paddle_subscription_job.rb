@@ -7,9 +7,9 @@ class FetchPaddleSubscriptionJob
 
   def perform(transaction_id)
     response = HTTParty.get(
-      "https://sandbox-api.paddle.com/transactions/#{transaction_id}",
+      "#{ENV['PADDLE_BASE_URL']}/transactions/#{transaction_id}",
       headers: {
-        'Authorization' => "Bearer 8add296a79cdf921c909c38efb005d78ae4ab24374207e5d92"
+        'Authorization' => "Bearer #{ENV['PADDLE_AUTH']}"
       }
     ).parsed_response
 
