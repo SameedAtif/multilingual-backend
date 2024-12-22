@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :organizations do
     collection do
       get 'settings'
+      get 'integrations'
     end
   end
 

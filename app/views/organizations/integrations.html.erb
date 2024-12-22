@@ -1,0 +1,71 @@
+<div class="flex min-h-screen">
+  <%= render partial: 'organizations/settings_sidebar', locals: { active_tab: 'manage_integrations' } %>
+  <main class="flex-1 px-8 py-2">
+    <div class="grid grid-cols-2 items-center">
+      <h1 class="text-2xl font-semibold mb-6">Manage Integrations</h1>
+    </div>
+    <div class="space-y-4">
+      <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-4" data-v0-t="card">
+        <div class="flex flex-col space-y-1.5 py-2 px-6">
+          <h3 class="whitespace-nowrap tracking-tight text-lg font-semibold">
+            Copy the following script and add it to you website
+          </h3>
+        </div>
+        <div class="py-4 px-6 space-y-2">
+          <div class="bg-gray-900 rounded-lg p-4 relative">
+            <!-- Copy Button -->
+            <button onclick="copyCode()" class="absolute top-4 right-4 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span id="copyButtonText">Copy</span>
+            </button>
+            <!-- Code Content -->
+            <pre class="text-gray-100 overflow-x-auto font-mono text-sm">
+                <code id="codeBlock">
+&lt;script&gt;
+(function(w,d,s,l,i){
+    w[l]=w[l]||function(){(w[l].q=w[l].q||[]).push(arguments)};
+    w[l].l=1*new Date();var a=d.createElement(s),
+    m=d.getElementsByTagName(s)[0];a.async=1;a.src=i;
+    m.parentNode.insertBefore(a,m)
+})(window,document,'script','ChatboxWidget','/chatbox.iife.js');
+
+// Optional: Override default settings
+ChatboxWidget('init', {
+    clientID: '<%= current_org.client_id %>'
+});
+&lt;/script&gt;
+                </code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<!-- JavaScript for copy functionality -->
+<script>
+    function copyCode() {
+    const codeBlock = document.getElementById('codeBlock');
+    const copyButton = document.getElementById('copyButtonText');
+
+    // Create a temporary textarea to copy the text
+    const textarea = document.createElement('textarea');
+    textarea.value = codeBlock.textContent;
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+        document.execCommand('copy');
+        copyButton.textContent = 'Copied!';
+        setTimeout(() => {
+        copyButton.textContent = 'Copy';
+        }, 2000);
+    } catch (err) {
+        console.error('Failed to copy text: ', err);
+    }
+
+    document.body.removeChild(textarea);
+    }
+</script>

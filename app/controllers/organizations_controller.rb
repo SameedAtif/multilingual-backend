@@ -31,6 +31,8 @@ class OrganizationsController < ApplicationController
 
   def settings; end
 
+  def integrations; end
+
   private
 
   def permitted_params
