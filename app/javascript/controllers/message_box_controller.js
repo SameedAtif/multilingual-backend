@@ -22,7 +22,7 @@ export default class extends Controller {
             const lastMessageTab = document.getElementById(`room-${messageObj.room_id}-last-message`);
             lastMessageTab.innerHTML = messageObj.target_text;
 
-            const messageInputField = document.getElementById('message_source_text')
+            const messageInputField = document.getElementById('message-input')
             messageInputField.value = ""
 
             if(userId == data.sender_id) {

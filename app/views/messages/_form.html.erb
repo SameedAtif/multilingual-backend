@@ -1,11 +1,14 @@
-<%= form_with model: @message do |f| %>
+<%= form_with model: @message, id: "send-message-form" do |f| %>
 <%= f.hidden_field :room_id, value: @message.room.id %>
+<%= f.hidden_field :message_on_enter_key, value: current_user.message_on_enter_key, class: "js-message-on-enter-key" %>
+
 <div class="flex flex-row items-center p-4">
   <div class="flex flex-row items-center w-full border rounded-3xl h-12 px-2">
     <div class="w-full">
-      <%= f.text_field :source_text,
+      <%= f.text_area :source_text,
         class:"border border-transparent w-full text-sm h-10 flex items-center",
-        placeholder:"Type your message...."
+        placeholder:"Type your message....",
+        id: "message-input"
       %>
     </div>
     <%# <div class="flex flex-row">
@@ -36,7 +39,7 @@
     </div> %>
   </div>
   <div class="ml-6">
-    <button type="submit" class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-600 hover:bg-black text-indigo-800 text-white">
+    <button type="submit" id="send-button" class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-600 hover:bg-black text-indigo-800 text-white">
       <svg class="w-5 h-5 transform rotate-90 -mr-px"
             fill="none"
             stroke="currentColor"
@@ -51,3 +54,30 @@
   </div>
 </div>
 <%end %>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("send-message-form");
+    const input = document.getElementById("message-input");
+    const sendButton = document.getElementById("send-button");
+    const messageOnEnterKey = form.querySelector('.js-message-on-enter-key').value === 'true';
+
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        if (e.shiftKey) {
+          // Shift + Enter always adds a new line
+          return;
+        }sendButton
+
+        if (messageOnEnterKey) {
+          // Prevent the newline and submit the form
+          e.preventDefault();
+          form.requestSubmit();
+        } else {
+          // Let the newline happen naturally
+          return;
+        }
+      }
+    });
+  });
+</script>
