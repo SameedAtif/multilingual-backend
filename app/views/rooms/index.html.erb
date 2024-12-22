@@ -2,6 +2,8 @@
 // v0 by Vercel.
 // https://v0.dev/t/KLaYcuYMLi5
 -->
+<script src="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/intro.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/introjs.min.css">
 
 <div class="flex h-screen">
   <div class="flex flex-col w-64 border-r">
@@ -187,3 +189,51 @@
     <%= render partial: 'rooms/room_tab', locals: { room: @first_room } if @first_room.present? %>
   </div>
 </div>
+
+<script>
+  <% if current_user.owned_org == current_org && !current_user.viewed_tutorial %>
+    introJs().setOptions({
+      steps: [
+        {
+          title: 'Welcome',
+          intro: "Hi 👋 and thanks for signing up. Let's walk you through the basics."
+        },
+        {
+          title: 'Chat list',
+          element: document.querySelector('#room-list'),
+          intro: 'All your chat messages will show up here.'
+        },
+        {
+          title: 'Chat box',
+          element: document.querySelector('#room-tab'),
+          intro: 'This is your chat window, where you can talk to your customers.'
+        },
+        {
+          title: 'Chat actions',
+          element: document.querySelector('[id^="room-"][id$="-actions-holder"]'),
+          intro: 'You can perform chat related actions from here.'
+        }
+      ]
+    }).oncomplete(function(){
+        $.ajax({
+            url: '<%= user_registration_path %>',
+            method: 'PATCH',
+            headers: {
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+              user: {
+                viewed_tutorial: true
+              }
+            }),
+            success: function (response) {
+              window.location.href = "<%=rooms_path%>";
+            },
+            error: function (xhr, status, error) {
+              console.error('Error:', error);
+            }
+          });
+      }).start();
+  <% end %>
+</script>

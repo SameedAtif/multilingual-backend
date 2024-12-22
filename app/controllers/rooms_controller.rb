@@ -37,9 +37,9 @@ class RoomsController < ApplicationController
     subscription = current_org.owner.paddle_subscriptions.last
     is_owner = current_org.owner == current_user
 
-    if subscription.status == "past_due" && is_owner
+    if subscription&.status == "past_due" && is_owner
       redirect_to edit_user_registration_path, alert: "Please pay the pending dues before proceeding. For any issues contact support."
-    elsif subscription.status == "past_due" && !is_owner
+    elsif subscription&.status == "past_due" && !is_owner || subscription.blank?
       sign_out(current_user) # Signs out the current user
       redirect_to root_path, notice: "You have been signed out. The organization has pending dues."
     end

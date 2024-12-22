@@ -198,7 +198,7 @@
                   <% end %>
                 </span>
                 <svg id="cross-icon" style="display: none;"xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-                <span id="chat-text" class="ml-2 text-xl"><%= Organization::VALID_LABELS[current_user.owned_org.label.to_sym] || 'Chat'%></span>
+                <span id="chat-text" class="ml-2 text-xl"><%= Organization::VALID_LABELS[current_user.owned_org.label&.to_sym] || 'Chat'%></span>
               </button>
             </div>
           </div>

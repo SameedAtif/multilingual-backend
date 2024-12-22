@@ -25,12 +25,12 @@ class Message < ApplicationRecord
       resource_id: id,
       resource_type: self.class.name,
       user_type: user.user_type,
-      user_id: room.other_participant(user).id,
+      user_id: room.other_participant(user).user.id,
       notification_type: Notification::NOTIFICATION_TYPES_MAP[:new_message],
       extra: {
-        title: "URGENT: New message from #{room.other_participant(user).name}",
+        title: "URGENT: New message from #{room.other_participant(user).user.name}",
         description: "Message contents are hidden",
-        redirect_url: rooms_path,
+        redirect_url: Rails.application.routes.url_helpers.rooms_path,
         cta_button_text: 'Click here to view details'
       }
     )

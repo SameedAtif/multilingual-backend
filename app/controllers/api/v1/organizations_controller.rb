@@ -11,7 +11,7 @@ module Api
           text_color: @org.text_color,
           button_color: @org.button_color,
           icon: @org.icon,
-          label: Organization::VALID_LABELS[@org.label.to_sym],
+          label: Organization::VALID_LABELS[@org.label&.to_sym] || 'Chat',
           greeting_message: @org.greeting_message
         }, status: :ok
       end

@@ -19,9 +19,11 @@ module Api
         Room.transaction do
           @room = Room.new(
             is_private: true,
-            name: "user_#{@user.id}"
+            name: "user_#{@user.id}",
+            organization: @organization,
+            assignee_id: current_assignee_id || owner_id
           )
-          @room.participants << Participant.new(room: @room, user_id: User.first.id) # replace with store owner
+          @room.participants << Participant.new(room: @room, user_id: @organization.current_assignee_id || @organization.owner_id) # replace with store owner
           @room.participants << Participant.new(room: @room, user_id: @user.id)
           @room.save!
         end

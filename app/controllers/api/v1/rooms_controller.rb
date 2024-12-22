@@ -12,7 +12,8 @@ module Api
           @room = Room.new(
             is_private: true,
             name: "user_#{@user.id}",
-            organization: @organization
+            organization: @organization,
+            assignee_id: current_assignee_id || owner_id
           )
           @room.participants << Participant.new(room: @room, user_id: @organization.current_assignee_id || @organization.owner_id)
           @room.participants << Participant.new(room: @room, user_id: @user.id)

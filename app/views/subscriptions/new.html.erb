@@ -1,5 +1,5 @@
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
+  function renderPaddle() {
   $(document).ready(function() {
     Paddle.Environment.set("sandbox");
     Paddle.Initialize({
@@ -72,6 +72,7 @@
       openCheckout(yearItemsList);
     });
   });
+  }
 
   function on_change(el){
     let selectedOption = el.target.checked;
@@ -85,6 +86,8 @@
     }
   }
 </script>
+
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js" onload="renderPaddle()"></script>
 
 <section class="px-4">
   <!-- component -->

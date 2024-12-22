@@ -6,7 +6,6 @@ class UnsubscribePaddleSubscriptionJob
   sidekiq_options retry: false
 
   def perform(subscription_id)
-    debugger
     response = HTTParty.post(
       "https://sandbox-api.paddle.com/subscriptions/#{subscription_id}/cancel",
       headers: {

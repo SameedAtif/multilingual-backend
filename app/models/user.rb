@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_one :owned_org, foreign_key: "owner_id", class_name: "Organization", dependent: :destroy
 
+  has_many :notifications, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :rooms, through: :participants
