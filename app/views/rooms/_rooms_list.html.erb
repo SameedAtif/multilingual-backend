@@ -13,7 +13,7 @@
           class: "flex flex-row items-center p-4 relative",
           form_class: "hover:bg-muted hover:text-muted-foreground #{room.id == @current_room.id ? 'bg-gray-100 hover:bg-gray-200': 'hover:bg-gray-100'} " do %>
           <%# <div class="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">2 hours ago</div> %>
-          <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-bold flex-shrink-0">
+          <div class="flex items-center justify-center h-10 w-10 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold flex-shrink-0">
             <%= room.other_participant(current_user)&.user&.name&.first %>
           </div>
           <div class="flex flex-col flex-grow ml-3">

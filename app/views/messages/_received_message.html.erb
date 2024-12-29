@@ -1,14 +1,24 @@
 <div class="col-start-1 col-end-8 py-3 rounded-lg" id="message-<%=message.id%>">
   <div class="flex flex-row items-center">
     <div
-        class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-700 hover:bg-blue-800 text-white flex-shrink-0"
+        class="flex items-center justify-center h-10 w-10 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white flex-shrink-0"
     >
       <%= message.user.name.first %>
     </div>
-    <div
-        class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-    >
-      <div><%= message.target_text %></div>
+    <div>
+      <div
+        class="relative ml-3 text-sm py-2 px-4 border rounded-xl bg-cyan-100"
+      >
+        <div><%= message.source_text %></div>
+      </div>
+      <div class="relative ml-3 grid grid-cols-[24px_1fr]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-corner-down-right"><polyline points="15 10 20 15 15 20"/><path d="M4 4v7a4 4 0 0 0 4 4h12"/></svg>
+        <div
+          class="text-sm bg-white py-2 px-4 shadow rounded-xl"
+        >
+          <div><%= message.target_text %></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

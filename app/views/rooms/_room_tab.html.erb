@@ -1,7 +1,7 @@
 <div data-controller="message-box" id='message-box' data-room-id="<%= room.id %>" data-user-id="<%=current_user.id%>" class="flex flex-col h-full w-full bg-white px-4 py-6">
   <div class="flex flex-row items-center justify-between py-4 px-6 rounded-2xl shadow">
     <div class="flex items-center">
-      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-blue-700 hover:bg-blue-800 text-white">
+      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white">
         <%= room.other_participant(current_user).user.name.first %>
       </div>
       <div class="flex flex-col ml-3">
@@ -67,7 +67,7 @@
                       Yes, I'm sure
                   </button>
                 <% end %>
-                <button data-modal-hide="close-chat-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                <button data-modal-hide="close-chat-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-600 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
             </div>
         </div>
     </div>
@@ -98,7 +98,7 @@
                       <%= f.label "Assignee", class:"block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
                       <%= f.select :assignee_id, options_for_select(room.organization.users.collect {|u| [u.name, u.id]}, [room.assignee&.name, room.assignee&.id]), {}, {class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"} %>
                     </div>
-                    <%= f.submit "Assign user", class:"w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"%>
+                    <%= f.submit "Assign user", class:"w-full text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-cyan-600 dark:focus:ring-cyan-700"%>
                 <% end %>
             </div>
         </div>

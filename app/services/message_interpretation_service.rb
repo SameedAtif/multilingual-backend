@@ -4,13 +4,14 @@ class MessageInterpretationService
     receiver = message.room.other_participant(sender)
     # 1 Users source language is the other users target language
     res = HTTParty.post(
-      "#{ENV['TRANSLATE_URL']}/translate/#{receiver.user.language.downcase}",
+      "#{ENV['TRANSLATE_URL']}/translate",
       body: {
-        sentences: [message.source_text]
+        text: message.source_text,
+        target_lang: receiver.user.language.downcase
       }.to_json,
       headers: {'Content-Type' => 'application/json'}
     ).parsed_response
 
-    res["translations"].first
+    res["translated"]
   end
 end
