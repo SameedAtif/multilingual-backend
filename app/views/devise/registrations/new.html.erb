@@ -29,6 +29,9 @@
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Already have an account? <a href="/users/sign_in" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
                   </p>
+                    <p class="text-sm mx-auto font-light text-gray-500 dark:text-gray-400">
+                        By Signing up you agree to our <%=link_to 'Terms & Conditions', terms_of_service_terms_path %> and our <%= link_to 'Privacy Policy', privacy_policy_terms_path %>
+                    </p>
               <% end %>
           </div>
       </div>

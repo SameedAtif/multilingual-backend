@@ -51,10 +51,14 @@ Rails.application.routes.draw do
   end
 
   resources :contacts, only: [:create]
-
   resources :subscriptions, only: [:new, :create, :destroy]
 
   get '/settings' => 'rooms#settings', as: :settings
-
   get '/request-a-demo' => 'dotcom#contact_us', as: :contact_us
+  resources :terms, only: [] do
+    collection do
+      get 'terms_of_service'
+      get 'privacy_policy'
+    end
+  end
 end
