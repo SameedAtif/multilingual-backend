@@ -11,7 +11,7 @@ class GenerateMessageJob
       user_id: user_id,
       room_id: room_id
     )
-    @message.target_text =  MessageInterpretationService.call(@message)
+    @message.target_text =  MessageInterpretationService.new.call(@message)
     @message.save!
     ActionCable.server.broadcast("rooms_channel:#{@message.room.id}", broadcast_payload)
   end

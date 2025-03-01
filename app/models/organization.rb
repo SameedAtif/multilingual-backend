@@ -30,6 +30,8 @@ class Organization < ApplicationRecord
   end
 
   def create_tutorial_chat
+    return if Rails.env.test?
+
     @user = User.find_or_create_by!(
       name: "Tutorial",
       email: "tutorial@example.com",
