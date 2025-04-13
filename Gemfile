@@ -102,3 +102,5 @@ gem 'mail_form'
 # Translation Gem - Primary
 gem 'deepl-rb', require: 'deepl'
 
+
+gem "lucide-rails", "~> 0.5.1"

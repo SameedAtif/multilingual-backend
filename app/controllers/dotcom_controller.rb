@@ -6,6 +6,8 @@ class DotcomController < ApplicationController
 
   def contact_us; end
 
+  def features; end
+
   private
 
   def redirect_if_authenticated
