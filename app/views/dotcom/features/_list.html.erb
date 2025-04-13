@@ -1,0 +1,25 @@
+<%# _feature_list.html.erb %>
+<div class="grid sm:grid-cols-2 xl:grid-cols-3 md:gap-x-2 gap-y-6 2xl:gap-y-8 3xl:gap-y-10 list-none m-0 p-0 flex-grow flex-shrink-0 sm:max-h-[65vh] overflow-y-auto">
+  <% categories.each do |category| %>
+    <div class="mb-8">
+      <div class="flex items-center gap-2 px-4 mb-3">
+        <%= lucide_icon(category_icons[category], class: 'w-5 h-5 text-[#0E7490]') %>
+        <h3 class="text-sm opacity-70 m-0 mb-1 px-3"><%= category %></h3>
+      </div>
+      <div class="list-none m-0 p-0 space-y-px">
+        <% features.select { |f| f['category'] == category }.each do |feature| %>
+          <button
+            onclick="<%= select_feature_function %>(<%=raw feature.to_json %>)"
+            class="flex items-center gap-3 text-sm font-medium click rounded-md px-3 py-2 transition-all w-full border border-b-3 border-transparent hover:border-light <%= selected_feature && selected_feature['name'] == feature['name'] ? 'bg-cyan-50 border-l-2 border-[#0E7490]' : '' %>"
+          >
+            <%= lucide_icon(feature['icon_name'], class: 'w-4 h-4 text-gray-500') %>
+            <div class="flex items-center justify-between w-full">
+              <span class="text-left"><%= feature['name'] %></span>
+              <span class="inline-block size-2 rounded-full <%= feature['status'] == 'live' ? 'bg-green-800' : feature['status'] == 'wip' ? 'bg-yellow-300' : 'bg-orange-700' %>"></span>
+            </div>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<%# _vote_modal.html.erb %>
+<% if is_open %>
+  <div class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-end p-4" id="vote-modal">
+    <div class="bg-white rounded-lg w-full max-w-md p-6 mr-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold">Vote for Feature</h3>
+        <button onclick="<%= close_modal_function %>" class="text-gray-500 hover:text-gray-700">
+          <%= lucide_icon('x', size: 24) %>
+        </button>
+      </div>
+      <p class="text-gray-600 mb-4">
+        Get notified when <%= feature_name %> becomes available
+      </p>
+      <form action="<%= vote_submit_path %>" method="post" data-remote="true" id="vote-form">
+        <input type="email" name="email" placeholder="Enter your email" class="w-full p-2 border rounded mb-4" required />
+        <input type="hidden" name="feature_name" value="<%= feature_name %>" />
+        <button type="submit" class="w-full bg-[#0E7490] text-white py-2 px-4 rounded hover:bg-[#0c6075]">
+          Notify Me
+        </button>
+      </form>
+    </div>
+  </div>
+<% end %>

@@ -1,1 +1,317 @@
 <%= render partial: 'shared/navbar' %>
+<%# features/index.html.erb %>
+<%
+  tabs = [
+            { id: 'all', label: 'All features' },
+            { id: 'live', label: 'Live' },
+            { id: 'wip', label: 'WIP' },
+            { id: 'roadmap', label: 'Roadmap' }
+          ]
+  active_tab = tabs.first
+  categories = ["Chat Tools", "Messaging Channels", "Reports & Analytics"]
+  category_icons = {
+    "Chat Tools" => "message-square",
+    "Messaging Channels" => "phone",
+    "Reports & Analytics" => "bar-chart-3"
+  }
+  filtered_features = [
+    {
+      name: "Multilingual Messaging",
+      category: "Chat Tools",
+      description: "Talk to your customers in their language with real-time translation. No barriers, just conversations.",
+      status: "live",
+      icon: "globe"
+    },
+    {
+      name: "Multilingual Voice Notes",
+      category: "Chat Tools",
+      description: "Send and receive voice messages, even if you and your customer speak different languages.",
+      status: "wip",
+      icon: "mic"
+    },
+    {
+      name: "Email, SMS, Call Reminder",
+      category: "Chat Tools",
+      description: "Never forget to follow up. Get reminders through emails, texts, and calls so no customer feels ignored.",
+      status: "live",
+      icon: "bell"
+    },
+    {
+      name: "Message Sneak-peek",
+      category: "Chat Tools",
+      description: "See what your customer is typing before they hit send.",
+      status: "live",
+      icon: "eye"
+    },
+    {
+      name: "Canned Responses",
+      category: "Chat Tools",
+      description: "Save time with pre-written replies for common questions.",
+      status: "live",
+      icon: "message-circle"
+    },
+    {
+      name: "Chat Tags",
+      category: "Chat Tools",
+      description: "Keep things organized by tagging conversations.",
+      status: "live",
+      icon: "tags"
+    },
+    {
+      name: "File Sharing",
+      category: "Chat Tools",
+      description: "Need to send a document, image, or something else? Just drop it in the chat.",
+      status: "live",
+      icon: "file"
+    },
+    {
+      name: "Chat Archives",
+      category: "Chat Tools",
+      description: "Look back at past conversations to keep track of customer history.",
+      status: "live",
+      icon: "archive"
+    },
+    {
+      name: "Inactivity Messages",
+      category: "Chat Tools",
+      description: "Automatically let customers know if you're away.",
+      status: "live",
+      icon: "clock"
+    },
+    {
+      name: "Notifications",
+      category: "Chat Tools",
+      description: "Stay on top of things with instant alerts.",
+      status: "live",
+      icon: "bell-ring"
+    },
+    {
+      name: "Chat Transfer",
+      category: "Chat Tools",
+      description: "Easily hand off conversations to the right team member.",
+      status: "live",
+      icon: "users"
+    },
+    {
+      name: "Customization",
+      category: "Chat Tools",
+      description: "Make the chat widget feel like a natural part of your brand.",
+      status: "live",
+      icon: "palette"
+    },
+    {
+      name: "Agent Profiles",
+      category: "Chat Tools",
+      description: "Give your team a personal touch with profiles.",
+      status: "live",
+      icon: "user"
+    },
+    {
+      name: "Chat Widget",
+      category: "Messaging Channels",
+      description: "Put live chat on your website so customers can reach you instantly.",
+      status: "live",
+      icon: "messages-square"
+    },
+    {
+      name: "Facebook",
+      category: "Messaging Channels",
+      description: "Chat with customers directly on Facebook.",
+      status: "live",
+      icon: "facebook"
+    },
+    {
+      name: "Instagram for Business",
+      category: "Messaging Channels",
+      description: "Manage Instagram DMs alongside other messages.",
+      status: "wip",
+      icon: "instagram"
+    },
+    {
+      name: "SMS",
+      category: "Messaging Channels",
+      description: "Send and receive texts for quick, convenient conversations.",
+      status: "live",
+      icon: "smartphone"
+    },
+    {
+      name: "Email",
+      category: "Messaging Channels",
+      description: "Reply to customer emails right from your chat dashboard.",
+      status: "live",
+      icon: "mail"
+    },
+    {
+      name: "WhatsApp Business",
+      category: "Messaging Channels",
+      description: "Stay in touch with customers on WhatsApp—their go-to messaging app.",
+      status: "roadmap",
+      icon: "message-circle-more"
+    },
+    {
+      name: "Apple Messages for Business",
+      category: "Messaging Channels",
+      description: "Make it easy for iPhone users to connect with you.",
+      status: "roadmap",
+      icon: "apple"
+    },
+    {
+      name: "Data Summary",
+      category: "Reports & Analytics",
+      description: "See key insights at a glance to understand how conversations are going.",
+      status: "live",
+      icon: "layout-dashboard"
+    },
+    {
+      name: "Chat Reports",
+      category: "Reports & Analytics",
+      description: "Track response times, customer satisfaction, and chat volume.",
+      status: "live",
+      icon: "file-bar-chart"
+    },
+    {
+      name: "Data Export",
+      category: "Reports & Analytics",
+      description: "Download your data anytime for deeper analysis.",
+      status: "roadmap",
+      icon: "file-down"
+    },
+    {
+      name: "Agent Reports",
+      category: "Reports & Analytics",
+      description: "Measure team performance and identify areas for improvement.",
+      status: "wip",
+      icon: "user-check"
+    },
+    {
+      name: "Customer Reports",
+      category: "Reports & Analytics",
+      description: "Understand who your customers are and how they engage with you.",
+      status: "live",
+      icon: "users-round"
+    }
+  ]
+  selected_feature = filtered_features.first
+  vote_modal_open = false
+  feature_votes_path = ""
+%>
+<div class="w-full min-h-screen bg-gray-50">
+  <div>
+    <div class="max-w-7xl mx-auto px-4 py-16">
+      <div class="flex items-center gap-3 mb-6">
+        <%= lucide_icon('sparkles', class: 'w-10 h-10 text-[#0E7490]') %>
+        <h1 class="text-5xl font-bold text-[#0E7490]">
+          Features That Matter
+        </h1>
+      </div>
+      <p class="text-xl max-w-3xl leading-relaxed">
+        Designed for Conversations, Not Confusion. Our features help you
+        communicate with customers effectively, understand their needs, and
+        grow your business.
+      </p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-screen-2xl mx-auto py-12">
+      <div class="relative">
+        <div class="list-none p-0 flex space-x-0.5 snap-x overflow-y-hidden overflow-x-auto justify-start relative max-w-screen px-5 md:px-0 overflow-x-auto flex space-x-4 m-0 p-0 list-none mb-6 border-b border-border dark:border-dark">
+          <% tabs.each do |tab| %>
+            <li class="snap-start !mb-0">
+              <div class="h-full">
+                <div class="relative">
+                  <button
+                    onclick="setActiveTab('<%= tab[:id] %>')"
+                    class="text-[15px] font-semibold flex space-x-2 items-center px-3 py-1 whitespace-nowrap font-bold <%= active_tab == tab[:id] ? 'border-b-2 border-[#0E7490] text-[#0E7490] bg-cyan-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' %>"
+                  >
+                    <%= tab[:label] %>
+                    <% if ['Live', 'WIP', 'Roadmap'].include?(tab[:label]) %>
+                      <span class="inline-block mt-1.5 ml-1 size-2 rounded-full <%= tab[:id] == 'live' ? 'bg-green-800' : tab[:id] == 'wip' ? 'bg-yellow-300' : 'bg-orange-700' %>"></span>
+                    <% end %>
+                  </button>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </div>
+      </div>
+      <div class="flex px-2 md:px-0 md:space-x-6 items-start">
+        <div class="@container flex-1">
+          <%= render partial: 'dotcom/features/list', locals: {
+            features: filtered_features,
+            categories: categories,
+            category_icons: category_icons,
+            selected_feature: selected_feature,
+            select_feature_function: 'selectFeature'
+          } %>
+        </div>
+        <div class="w-1/2">
+          <%= render partial: 'dotcom/features/card', locals: {
+            feature: selected_feature,
+            on_vote_function: 'openVoteModal()'
+          } %>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-4xl mx-auto py-20 text-center">
+      <h2 class="text-3xl font-bold mb-6">
+        Ready to Elevate Your Customer Conversations?
+      </h2>
+      <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+        Whether you're looking to streamline support, boost engagement, or
+        simply make chatting with customers effortless, we've got you
+        covered.
+      </p>
+      <div class="flex justify-center gap-4">
+        <button class="bg-[#0E7490] text-white px-8 py-4 rounded-lg hover:bg-[#0c6075] transition-colors font-medium flex items-center gap-2">
+          Sign up now
+          <%= lucide_icon('arrow-right', class: 'w-5 h-5') %>
+        </button>
+        <button class="bg-white text-[#0E7490] px-8 py-4 rounded-lg border-2 border-[#0E7490] hover:bg-cyan-50 transition-colors font-medium">
+          Talk to sales
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <%= render partial: 'dotcom/features/vote_modal', locals: {
+    is_open: vote_modal_open,
+    feature_name: selected_feature&.dig('name').to_s,
+    close_modal_function: 'closeVoteModal()',
+    vote_submit_path: feature_votes_path
+  } %>
+</div>
+
+<script>
+  // JavaScript to handle the interactive elements
+  let activeTab = '<%= active_tab %>';
+  let selectedFeature = <%= selected_feature.to_json.html_safe %>;
+  let voteModalOpen = <%= vote_modal_open %>;
+
+  function setActiveTab(tabId) {
+    activeTab = tabId;
+    // Refresh the page with the new tab parameter
+    window.location.href = '<%= features_path %>?tab=' + tabId +
+      (selectedFeature ? '&feature=' + encodeURIComponent(selectedFeature.name) : '');
+  }
+
+  function selectFeature(feature) {
+    selectedFeature = feature;
+    // Update the URL without refreshing the page
+    const url = new URL(window.location);
+    url.searchParams.set('feature', feature.name);
+    window.history.pushState({}, '', url);
+
+    // Update the feature card section
+    // This would typically be done with Turbo/Stimulus in a modern Rails app
+  }
+
+  function openVoteModal() {
+    voteModalOpen = true;
+    document.querySelector('#vote-modal').style.display = 'flex';
+  }
+
+  function closeVoteModal() {
+    voteModalOpen = false;
+    document.querySelector('#vote-modal').style.display = 'none';
+  }
+</script>

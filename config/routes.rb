@@ -55,6 +55,7 @@ Rails.application.routes.draw do
 
   get '/settings' => 'rooms#settings', as: :settings
   get '/request-a-demo' => 'dotcom#contact_us', as: :contact_us
+  get '/features' => 'dotcom#features', as: :features
   resources :terms, only: [] do
     collection do
       get 'terms_of_service'
