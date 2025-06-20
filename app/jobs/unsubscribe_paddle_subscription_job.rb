@@ -9,7 +9,7 @@ class UnsubscribePaddleSubscriptionJob
     response = HTTParty.post(
       "https://sandbox-api.paddle.com/subscriptions/#{subscription_id}/cancel",
       headers: {
-        'Authorization' => "Bearer 8add296a79cdf921c909c38efb005d78ae4ab24374207e5d92"
+        'Authorization' => "Bearer #{ENV['PADDLE_AUTH']}"
       }
     ).parsed_response
     if response.dig("data", "status") == "cancelled"
