@@ -1,24 +1,56 @@
-# README
+# 🗣️ Fluent Assist — Multilingual Customer Success Platform
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Fluent Assist is a **multilingual customer support application** built with Ruby on Rails. It enables businesses to provide **real-time support** in multiple languages, onboard and manage agents, and offer a fully **customizable chat widget** for their site or Shopify store — all with one-click installation.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 🚀 Features
 
-* System dependencies
+- 🌍 **Multilingual Live Chat Support**  
+  Automatically translate live conversations in real-time.
 
-* Configuration
+- 🎨 **Customizable Chat Widget**  
+  Match the widget with your brand — colors, welcome messages, agent avatars, and more.
 
-* Database creation
+- 👥 **Agent Onboarding & Management**  
+  Invite, onboard, and manage support agents from an intuitive dashboard.
 
-* Database initialization
+- ⚡ **One-Click Installation**  
+  Easy embed on any website or Shopify store.
 
-* How to run the test suite
+- 🛒 **Shopify Integration**  
+  Natively integrates with Shopify for seamless customer data syncing.
 
-* Services (job queues, cache servers, search engines, etc.)
+- 💳 **Payment Integrations**  
+  Accept payments through integrated platforms like Stripe.
 
-* Deployment instructions
+---
 
-* ...
+## ✅ Why Fluent Assist?
+
+- 🏃‍♂️ **Fast** — Optimized for speed from backend to frontend.  
+- 📱 **Responsive** — Works flawlessly on mobile, tablet, and desktop.  
+- 🧠 **Easy to Use** — Clean UI for both customers and agents.  
+- 📈 **Scalable** — From solo operators to large teams.  
+- 💡 **Lightweight** — Minimal JS/CSS overhead, fast load times.
+
+---
+
+## 🐳 Docker Setup
+
+This application ships with a full Docker development and production environment.
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Running in Development
+
+```bash
+git clone https://github.com/your-org/fluent-assist.git
+cd fluent-assist
+
+cp .env.example .env
+docker-compose up --build
+```
