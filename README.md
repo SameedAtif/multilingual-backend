@@ -7,7 +7,10 @@ Fluent Assist is a **multilingual customer support application** built with Ruby
 ## 🚀 Features
 
 - 🌍 **Multilingual Live Chat Support**  
-  Automatically translate live conversations in real-time.
+  Automatically translate live conversations in real-time using seamless Turbo Stream updates.
+
+- ⚡ **Real-Time Messaging** with Turbo + Action Cable  
+  Chat is powered by **Turbo Frame** and **Turbo Stream** combined with **Action Cable** for blazing-fast WebSocket-powered conversations.
 
 - 🎨 **Customizable Chat Widget**  
   Match the widget with your brand — colors, welcome messages, agent avatars, and more.
@@ -15,20 +18,20 @@ Fluent Assist is a **multilingual customer support application** built with Ruby
 - 👥 **Agent Onboarding & Management**  
   Invite, onboard, and manage support agents from an intuitive dashboard.
 
-- ⚡ **One-Click Installation**  
+- 🧩 **One-Click Installation**  
   Easy embed on any website or Shopify store.
 
 - 🛒 **Shopify Integration**  
   Natively integrates with Shopify for seamless customer data syncing.
 
-- 💳 **Payment Integrations**  
-  Accept payments through integrated platforms like Stripe.
+- 💳 **Paddle Subscription Integration**  
+  Fully integrated with **Paddle** to manage SaaS billing, trials, and recurring subscriptions globally.
 
 ---
 
 ## ✅ Why Fluent Assist?
 
-- 🏃‍♂️ **Fast** — Optimized for speed from backend to frontend.  
+- 🏃‍♂️ **Fast** — Optimized with Hotwire (Turbo + Stimulus) for speed and minimal reloads.  
 - 📱 **Responsive** — Works flawlessly on mobile, tablet, and desktop.  
 - 🧠 **Easy to Use** — Clean UI for both customers and agents.  
 - 📈 **Scalable** — From solo operators to large teams.  
@@ -53,4 +56,3 @@ cd fluent-assist
 
 cp .env.example .env
 docker-compose up --build
-```
